@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TuxMat Newsletter Strategy — Internal Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#000000;
+    --gold:#B9975B;
+    --gold2:#DFBA7C;
+    --grey:#DBDCDD;
+    --white:#FFFFFF;
+    --ink:#1a1a1a;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Poppins',Arial,sans-serif;
+    font-weight:300;
+    color:var(--ink);
+    background:var(--white);
+    line-height:1.6;
+  }
+  h1,h2,h3,h4{
+    font-weight:500;
+    margin:0 0 .5em 0;
+    letter-spacing:.01em;
+  }
+  a{color:var(--gold);}
+  .masthead{
+    background:var(--black);
+    color:var(--white);
+    padding:64px 24px 48px;
+    text-align:center;
+  }
+  .wordmark{
+    font-size:14px;
+    letter-spacing:.35em;
+    font-weight:600;
+    color:var(--gold2);
+    margin-bottom:18px;
+  }
+  .masthead h1{
+    font-size:clamp(28px,4vw,42px);
+    color:var(--white);
+    max-width:820px;
+    margin:0 auto 14px;
+  }
+  .masthead p{
+    font-weight:300;
+    color:var(--grey);
+    max-width:640px;
+    margin:0 auto;
+    font-size:15px;
+  }
+  nav.toc{
+    position:sticky;
+    top:0;
+    z-index:10;
+    background:var(--white);
+    border-bottom:1px solid var(--grey);
+    display:flex;
+    gap:4px;
+    overflow-x:auto;
+    padding:0 16px;
+  }
+  nav.toc a{
+    display:block;
+    padding:16px 14px;
+    font-size:13px;
+    font-weight:500;
+    color:var(--ink);
+    text-decoration:none;
+    white-space:nowrap;
+    border-bottom:2px solid transparent;
+  }
+  nav.toc a:hover{border-bottom:2px solid var(--gold);}
+  main{max-width:960px;margin:0 auto;padding:0 24px;}
+  section{padding:64px 0;border-bottom:1px solid var(--grey);}
+  section:last-of-type{border-bottom:none;}
+  .eyebrow{
+    font-size:12px;
+    letter-spacing:.2em;
+    font-weight:600;
+    color:var(--gold);
+    text-transform:uppercase;
+    margin-bottom:10px;
+  }
+  section > h2{font-size:26px;max-width:680px;}
+  section > .lede{max-width:680px;color:#444;margin-bottom:36px;font-size:15px;}
+  .pillar-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:20px;
+  }
+  .pillar-card{
+    border:1px solid var(--grey);
+    border-radius:6px;
+    padding:24px;
+    background:var(--white);
+  }
+  .pillar-card h3{font-size:17px;margin-bottom:8px;}
+  .pillar-card .belief{font-size:14px;color:#444;margin-bottom:16px;}
+  .proof-row{font-size:12.5px;margin-bottom:6px;line-height:1.5;}
+  .proof-label{
+    display:inline-block;
+    font-size:10px;
+    font-weight:600;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--white);
+    background:var(--black);
+    padding:2px 7px;
+    border-radius:3px;
+    margin-right:6px;
+  }
+  .proof-label.capsule{background:var(--gold);color:var(--black);}
+  .badge{
+    display:inline-block;
+    font-size:10.5px;
+    font-weight:600;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    padding:3px 9px;
+    border-radius:20px;
+    margin-bottom:10px;
+  }
+  .badge.belonging{background:var(--black);color:var(--gold2);}
+  .callout{
+    background:#0000000a;
+    border-left:3px solid var(--gold);
+    padding:22px 26px;
+    border-radius:4px;
+    margin-top:8px;
+  }
+  .callout h4{font-size:15px;margin-bottom:10px;}
+  .callout ol{margin:0;padding-left:20px;font-size:14.5px;}
+  .callout li{margin-bottom:8px;}
+  table{width:100%;border-collapse:collapse;font-size:14px;}
+  th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--grey);vertical-align:top;}
+  th{font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#555;}
+  tr.current td{background:#B9975B14;}
+  tr.spotlight td{background:#00000006;}
+  .tag{
+    display:inline-block;
+    font-size:10px;
+    font-weight:600;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    padding:2px 8px;
+    border-radius:3px;
+    background:var(--gold);
+    color:var(--black);
+  }
+  .tag.now{background:var(--black);color:var(--gold2);}
+  .tag.gap{background:var(--grey);color:#555;}
+  td.date-cell{font-variant-numeric:tabular-nums;white-space:nowrap;color:#555;font-size:13px;}
+  td.dest-cell{font-size:13.5px;}
+  .gap-text{color:#777;font-style:italic;}
+  .note-box{
+    margin-top:24px;
+    padding:18px 22px;
+    background:var(--grey);
+    border-radius:4px;
+    font-size:13.5px;
+  }
+  dl{max-width:720px;}
+  dt{font-weight:600;font-size:13px;letter-spacing:.03em;color:var(--gold);text-transform:uppercase;margin-top:18px;}
+  dd{margin:4px 0 0;font-size:14.5px;}
+  .email-frame{
+    max-width:600px;
+    margin:0 auto;
+    border:1px solid var(--grey);
+    border-radius:8px;
+    overflow:hidden;
+    box-shadow:0 12px 40px rgba(0,0,0,.08);
+  }
+  .module{padding:28px 32px;border-bottom:1px solid var(--grey);position:relative;}
+  .module:last-child{border-bottom:none;}
+  .module-label{
+    font-size:10px;
+    font-weight:600;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:#999;
+    margin-bottom:14px;
+  }
+  .module.compliance-mod{background:var(--white);text-align:center;padding:8px 20px;font-size:10px;color:#777;border-bottom:1px solid var(--grey);}
+  .module.header-mod{background:var(--black);text-align:center;padding:20px;}
+  .module.header-mod .module-label{color:#777;}
+  .logo-img{height:28px;width:auto;display:block;margin:0 auto 8px;}
+  .module.header-mod .tagline{color:var(--grey);font-size:11px;letter-spacing:.04em;}
+  .module.hero-img-mod{background:var(--black);padding:0;}
+  .module.hero-img-mod .module-label{padding:14px 32px 0;color:#777;}
+  .hero-img-box{
+    margin:14px 16px 0;
+    aspect-ratio:16/9;
+    background:linear-gradient(135deg,#1a1a1a,#000);
+    border:1px dashed #444;
+    color:#999;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    font-size:12px;
+    padding:20px;
+  }
+  .module.hero-copy-mod{background:var(--black);text-align:center;padding-top:24px;padding-bottom:32px;}
+  .module.hero-copy-mod h3{font-size:24px;color:var(--gold);line-height:1.3;margin-bottom:14px;}
+  .module.hero-copy-mod p{font-size:16px;color:var(--white);margin:0 0 18px;max-width:420px;margin-left:auto;margin-right:auto;line-height:1.6;}
+  .module.skipped-mod{background:repeating-linear-gradient(135deg,#fafafa,#fafafa 10px,#f2f2f2 10px,#f2f2f2 20px);font-size:12.5px;color:#888;font-style:italic;padding:16px 32px;}
+  .module.feature-callout-mod{background:var(--white);padding:24px 32px 28px;}
+  .callout-img-box{
+    aspect-ratio:16/7;
+    background:linear-gradient(135deg,#f2f2f2,#e6e6e6);
+    border:1px dashed #bbb;
+    color:#999;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    font-size:12px;
+    padding:16px;
+    margin-bottom:16px;
+    border-radius:4px;
+  }
+  .leader-lines{list-style:none;padding:0;margin:0;}
+  .leader-lines li{
+    font-size:14px;
+    color:var(--ink);
+    padding:8px 0 8px 20px;
+    border-left:2px solid var(--gold);
+    margin-bottom:6px;
+  }
+  .leader-lines li strong{color:var(--black);}
+  .module.value-prop-mod{background:var(--white);}
+  .module.value-prop-mod h4{font-size:24px;color:var(--gold);margin-bottom:14px;}
+  .module.value-prop-mod p{font-size:16px;color:var(--ink);line-height:1.7;margin:0;}
+  .module.stat-bar-mod{background:var(--grey);text-align:center;}
+  .stat-card{
+    background:var(--white);
+    border-radius:6px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    gap:28px;
+    max-width:400px;
+    margin:0 auto;
+  }
+  .stat-divider{width:1px;align-self:stretch;background:var(--grey);}
+  .stat-num{font-size:32px;font-weight:500;color:var(--gold);line-height:1.2;}
+  .stat-label{font-size:13px;color:var(--black);margin-top:4px;}
+  .warranty-line{font-size:13px;color:#444;margin-top:14px;}
+  .module.grid-mod{background:var(--black);text-align:center;}
+  .grid-heading{color:var(--white);font-size:20px;margin-bottom:20px;}
+  .product-grid{display:flex;justify-content:center;gap:16px;margin-bottom:22px;flex-wrap:wrap;}
+  .product-card{width:150px;}
+  .product-thumb{
+    aspect-ratio:1/1;
+    background:#1a1a1a;
+    border:1px solid #333;
+    border-radius:4px;
+    color:#888;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:11px;
+    margin-bottom:8px;
+  }
+  .product-card.capsule-card .product-thumb{border-color:var(--gold);color:var(--gold2);}
+  .product-label{font-size:12px;color:var(--grey);}
+  .module.tagline-mod{background:var(--white);text-align:center;}
+  .module.tagline-mod{color:var(--gold);font-size:18px;font-weight:500;}
+  .module.footnote-mod{background:var(--white);color:#888;font-size:10px;text-align:center;line-height:1.6;}
+  .module.social-mod{background:var(--black);color:var(--grey);font-size:11px;text-align:center;padding:18px;}
+  .module.address-mod{background:var(--black);color:#777;font-size:10px;text-align:center;}
+  .module.unsub-mod{background:var(--black);text-align:center;padding:16px;}
+  .unsub-link{color:var(--grey);font-size:10px;text-decoration:underline;}
+  .cta-btn{
+    display:inline-block;
+    background:var(--gold);
+    color:var(--black);
+    font-weight:600;
+    font-size:14px;
+    letter-spacing:.02em;
+    padding:13px 28px;
+    border-radius:22px;
+    text-decoration:none;
+  }
+  .subject-options{list-style:none;padding:0;margin:0 0 20px;}
+  .subject-options li{
+    padding:10px 14px;
+    border:1px solid var(--grey);
+    border-radius:4px;
+    margin-bottom:8px;
+    font-size:14px;
+  }
+  .subject-options li.recommended{border-color:var(--gold);background:#B9975B0d;}
+  .subject-options .rec-tag{float:right;font-size:10px;font-weight:600;color:var(--gold);letter-spacing:.05em;}
+  .review-grid{display:grid;grid-template-columns:1fr;gap:16px;}
+  .review-item{
+    border:1px solid var(--grey);
+    border-radius:6px;
+    padding:18px 22px;
+  }
+  .review-item.pass{border-left:4px solid #6b8f5f;}
+  .review-item.flag{border-left:4px solid var(--gold);}
+  .review-item h4{font-size:14.5px;margin-bottom:8px;}
+  .review-item p{font-size:13.5px;margin:0;color:#333;}
+  .status{
+    display:inline-block;
+    font-size:10px;
+    font-weight:600;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    padding:2px 8px;
+    border-radius:3px;
+    margin-right:8px;
+  }
+  .status.pass{background:#6b8f5f22;color:#4a6640;}
+  .status.flag{background:#B9975B22;color:#8a6c33;}
+  footer.final{
+    background:var(--black);
+    color:var(--grey);
+    text-align:center;
+    padding:40px 24px;
+    font-size:13px;
+  }
+  footer.final strong{color:var(--gold2);}
+  @media (max-width:640px){
+    section{padding:44px 0;}
+    .module{padding:22px 20px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="wordmark">TUXMAT</div>
+  <h1>Bi-Weekly Newsletter Strategy: Pillar System &amp; Issue 1</h1>
+  <p>Internal reference for CRM, brand, and design. Covers the five content pillars, the annual calendar, where Capsule fits, and the reviewed draft for the first issue, laid out against TuxMat's real production spec sheet and module library, with the real logo mark.</p>
+</div>
+
+<nav class="toc">
+  <a href="#pillars">Pillars</a>
+  <a href="#capsule">Where Capsule Fits</a>
+  <a href="#calendar">Calendar</a>
+  <a href="#brief">Issue 1 Brief</a>
+  <a href="#mockup">Issue 1 Draft</a>
+  <a href="#review">Review Findings</a>
+  <a href="#appendix">Appendix</a>
+</nav>
+
+<main>
+
+  <section id="pillars">
+    <div class="eyebrow">Part 1</div>
+    <h2>The five pillars</h2>
+    <p class="lede">Every scheduled newsletter ladders to exactly one of these. This is a newsletter-specific system built for a retention and relationship audience: existing owners and subscribed non-purchasers. It's distinct from the three social content pillars used for acquisition. Category Disruption is deliberately excluded here. It's an interrupt pillar for strangers, and this audience has already agreed to hear from us.</p>
+    <p class="lede">Each pillar is a belief, not a product category, so every one of them needs to hold proof from both product lines: floor mats and the TuxMat Capsule™ License Plate Case.</p>
+
+    <div class="pillar-grid">
+      <div class="pillar-card">
+        <h3>Engineering Depth</h3>
+        <div class="belief">The belief: TuxMat is built, not assembled.</div>
+        <div class="proof-row"><span class="proof-label">Mat</span>3D laser scanning, TriForce™ construction.</div>
+        <div class="proof-row"><span class="proof-label capsule">Capsule</span>Aerospace-grade machined aluminum, milled from a single block, rattle-free precision alignment.</div>
+      </div>
+      <div class="pillar-card">
+        <h3>Design Authority</h3>
+        <div class="belief">The belief: a TuxMat product should look like it belongs to the vehicle, not added onto it.</div>
+        <div class="proof-row"><span class="proof-label">Mat</span>Interior harmony, the carbon fiber&ndash;inspired surface.</div>
+        <div class="proof-row"><span class="proof-label capsule">Capsule</span>Understated two-tone finish, complements the factory aesthetic rather than announcing itself.</div>
+      </div>
+      <div class="pillar-card">
+        <h3>Care &amp; Longevity</h3>
+        <div class="belief">The belief: the relationship doesn't end at checkout. The workhorse pillar, carried mostly by mats since weather is a mat story first.</div>
+        <div class="proof-row"><span class="proof-label">Mat</span>Seasonal protection, the Limited Lifetime Warranty as a lived promise.</div>
+        <div class="proof-row"><span class="proof-label capsule">Capsule</span>ClearLock™ resists yellowing and hazing over years, corrosion-resistant hardware.</div>
+      </div>
+      <div class="pillar-card">
+        <h3>Proof &amp; Trust</h3>
+        <div class="belief">The belief: confidence should be demonstrated, not asserted.</div>
+        <div class="proof-row"><span class="proof-label">Mat + Capsule</span>The 4.8★ rating, the Limited Lifetime Warranty, exact specifications stated plainly.</div>
+      </div>
+      <div class="pillar-card">
+        <span class="badge belonging">Capsule's strongest fit</span>
+        <h3>Community &amp; Belonging</h3>
+        <div class="belief">The belief: owning a TuxMat means noticing what other people don't.</div>
+        <div class="proof-row"><span class="proof-label capsule">Capsule</span>Owners notice the one surface nobody engineered, the same way they'd notice a rattle before anyone points it out. Identical instinct this pillar rewards.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="capsule">
+    <div class="eyebrow">Where Capsule fits</div>
+    <h2>No sixth pillar. Two deliberate moments, plus a standing mechanism.</h2>
+    <p class="lede">Capsule does not get its own pillar or its own month. At roughly 0.2% of revenue against a list where the overwhelming majority are mat owners or mat prospects, a dedicated Capsule month on a fixed schedule would mean talking past most of the list on a rhythm &mdash; the opposite of restraint. Instead:</p>
+    <div class="callout">
+      <h4>How Capsule earns room</h4>
+      <ol>
+        <li><strong>One dedicated spotlight issue per season, four a year</strong>, placed where the pillar and the product story are naturally strongest, not spread evenly across all five pillars for the sake of coverage.</li>
+        <li><strong>Standing presence in the catalogue module</strong>, once owner/subscriber segmentation is live. An existing mat owner should see Capsule (and SuperTrunk™) as the cross-sell far more often than a generic "shop by vehicle" link pointing at something they already bought. This is the everyday mechanism; the four seasonal spotlights are the deliberate emphasis on top of it.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="calendar">
+    <div class="eyebrow">Part 2</div>
+    <h2>The annual calendar</h2>
+    <p class="lede">Each bi-weekly issue carries its own pillar, not the month's, two chances a month to speak to a different part of the belief system, not one belief said twice. Issue A and Issue B in the same month lead with two different pillars, except in the four months carrying a Capsule spotlight (below). Care &amp; Longevity still runs more often than the others, the only pillar with a genuine seasonal peg every time; the rest fill in around it, weighted by where the real blog content actually is, not by forcing an even split. Send cadence is the first and third Thursday of each month.</p>
+
+    <div style="overflow-x:auto;">
+    <table>
+      <thead><tr><th>Send date</th><th>Issue</th><th>Pillar</th><th>Hero CTA destination</th></tr></thead>
+      <tbody>
+        <tr class="current"><td class="date-cell">Thu, Oct 1, 2026</td><td>1A <span class="tag now">Real first live send</span></td><td>Engineering Depth</td><td class="dest-cell">&ldquo;<a href="https://www.tuxmat.com/blogs/articles/why-floor-mat-fit-and-coverage-matter-more-than-material">Why Floor Mat Fit and Coverage Matter More Than Material</a>&rdquo;</td></tr>
+        <tr><td class="date-cell">Thu, Oct 15, 2026</td><td>1B</td><td>Care &amp; Longevity</td><td class="dest-cell">&ldquo;<a href="https://www.tuxmat.com/blogs/articles/all-weather-floor-mats-complete-guide-to-materials-fit-and-protection">All-Weather Floor Mats: Complete Guide</a>&rdquo;</td></tr>
+        <tr><td class="date-cell">Thu, Nov 5, 2026</td><td>2A</td><td>Community &amp; Belonging</td><td class="dest-cell">&ldquo;<a href="https://www.tuxmat.com/blogs/articles/new-car-owner-floor-mat-gift-guide">New Car Owner Gift Guide</a>&rdquo;</td></tr>
+        <tr><td class="date-cell">Thu, Nov 19, 2026</td><td>2B</td><td>Proof &amp; Trust</td><td class="dest-cell">&ldquo;<a href="https://www.tuxmat.com/blogs/articles/limited-lifetime-warranty-explained">TuxMat Limited Lifetime Warranty Explained</a>&rdquo; <span style="color:#777;">(give with confidence, ahead of the gift-buying rush)</span></td></tr>
+        <tr><td class="date-cell">Thu, Dec 3, 2026</td><td>3A</td><td>Engineering Depth</td><td class="dest-cell">&ldquo;<a href="https://www.tuxmat.com/blogs/articles/cargo-liners-trunk-mats-complete-guide-tuxmat%C2%AE">Cargo Liners and Trunk Mats: Complete Guide</a>&rdquo;</td></tr>
+        <tr class="spotlight"><td class="date-cell">Thu, Dec 17, 2026</td><td>3B <span class="tag">Capsule spotlight</span></td><td><em>Care &amp; Longevity lens</em></td><td class="dest-cell gap-text">No blog fit by design &middot; <a href="https://www.tuxmat.com/pages/tuxmat-capsule-license-plate-case">Capsule product page</a></td></tr>
+        <tr><td class="date-cell">Thu, Jan 7, 2027</td><td>4A</td><td>Proof &amp; Trust</td><td class="dest-cell">&ldquo;<a href="https://www.tuxmat.com/blogs/articles/5-floor-mat-myths-that-cost-you-money-and-what-tuxmat-engineering-reveals">5 Floor Mat Myths</a>&rdquo;</td></tr>
+        <tr><td class="date-cell">Thu, Jan 21, 2027</td><td>4B</td><td>Community &amp; Belonging</td><td class="dest-cell">&ldquo;<a href="https://www.tuxmat.com/blogs/articles/best-floor-mats-for-dogs-and-pet-owners-what-actually-works">Best Floor Mats for Dogs and Pet Owners</a>&rdquo;</td></tr>
+        <tr><td class="date-cell">Thu, Feb 4, 2027</td><td>5A <span class="tag gap">Content gap</span></td><td>Design Authority</td><td class="dest-cell gap-text">No existing post fits &middot; shop-by-vehicle page</td></tr>
+        <tr><td class="date-cell">Thu, Feb 18, 2027</td><td>5B</td><td>Engineering Depth</td><td class="dest-cell">&ldquo;<a href="https://www.tuxmat.com/blogs/articles/best-winter-floor-mats-for-snow-salt-and-slush-complete-protection-guide">Best Winter Floor Mats for Snow, Salt, and Slush</a>&rdquo; <span style="color:#777;">(has real photography, incl. rust-damage comparison; material-performance angle, EVA foam vs. rubber cracking in the cold)</span></td></tr>
+        <tr><td class="date-cell">Thu, Mar 4, 2027</td><td>6A</td><td>Care &amp; Longevity</td><td class="dest-cell">&ldquo;<a href="https://www.tuxmat.com/blogs/articles/post-winter-carpet-rescue-resale-protection">Post-Winter Carpet Damage and Resale Check</a>&rdquo;</td></tr>
+        <tr><td class="date-cell">Thu, Mar 18, 2027</td><td>6B</td><td>Engineering Depth</td><td class="dest-cell">&ldquo;<a href="https://www.tuxmat.com/blogs/articles/custom-car-mats-why-custom-fit-floor-mats-beat-universal-every-time">Custom Car Mats: Custom-Fit Beats Universal</a>&rdquo;</td></tr>
+        <tr><td class="date-cell">Thu, Apr 1, 2027</td><td>7A</td><td>Engineering Depth</td><td class="dest-cell">&ldquo;<a href="https://www.tuxmat.com/blogs/articles/suv-floor-mats-why-seat-count-decides-the-fit-2026">SUV Floor Mats: How Seat Count Decides Fit</a>&rdquo;</td></tr>
+        <tr class="spotlight"><td class="date-cell">Thu, Apr 15, 2027</td><td>7B <span class="tag">Capsule spotlight</span></td><td><em>Engineering Depth lens</em></td><td class="dest-cell gap-text">No blog fit by design &middot; <a href="https://www.tuxmat.com/pages/tuxmat-capsule-license-plate-case">Capsule product page</a></td></tr>
+        <tr><td class="date-cell">Thu, May 6, 2027</td><td>8A</td><td>Community &amp; Belonging</td><td class="dest-cell">&ldquo;<a href="https://www.tuxmat.com/blogs/articles/12-must-have-car-essentials-for-family-road-trips-this-summer">12 Must-Have Car Essentials for Family Road Trips</a>&rdquo;</td></tr>
+        <tr><td class="date-cell">Thu, May 20, 2027</td><td>8B</td><td>Care &amp; Longevity</td><td class="dest-cell">&ldquo;<a href="https://www.tuxmat.com/blogs/articles/summer-road-trip-car-interior-protection">Summer Road Trip Interior Protection: 7 Points</a>&rdquo;</td></tr>
+        <tr><td class="date-cell">Thu, Jun 3, 2027</td><td>9A</td><td>Care &amp; Longevity</td><td class="dest-cell">&ldquo;<a href="https://www.tuxmat.com/blogs/articles/tuxmat-complete-protection-guide-for-outdoor-adventures-pet-owners-and-all-weather-driving">Complete Protection Guide: Outdoor Adventures, Pet Owners, and All-Weather Driving</a>&rdquo; <span style="color:#777;">(has real images)</span></td></tr>
+        <tr class="spotlight"><td class="date-cell">Thu, Jun 17, 2027</td><td>9B <span class="tag">Capsule spotlight</span></td><td><em>Care &amp; Longevity lens</em></td><td class="dest-cell gap-text">No blog fit by design &middot; <a href="https://www.tuxmat.com/pages/tuxmat-capsule-license-plate-case">Capsule product page</a></td></tr>
+        <tr><td class="date-cell">Thu, Jul 1, 2027</td><td>10A</td><td>Proof &amp; Trust</td><td class="dest-cell">&ldquo;<a href="https://www.tuxmat.com/blogs/articles/limited-lifetime-warranty-explained">TuxMat Limited Lifetime Warranty Explained</a>&rdquo;</td></tr>
+        <tr><td class="date-cell">Thu, Jul 15, 2027</td><td>10B</td><td>Care &amp; Longevity</td><td class="dest-cell">&ldquo;<a href="https://www.tuxmat.com/blogs/articles/all-weather-floor-mats-vs-carpet-floor-mats-which-actually-protects-your-car">All-Weather vs Carpet Mats: Which Is Right for You</a>&rdquo; <span style="color:#777;">(needs a summer-appropriate angle, sand and mud and water rather than winter reinforcement)</span></td></tr>
+        <tr><td class="date-cell">Thu, Aug 5, 2027</td><td>11A <span class="tag gap">Content gap</span></td><td>Design Authority</td><td class="dest-cell gap-text">Same gap as February &middot; shop-by-vehicle page <span style="color:#777;font-style:normal;">(demo draft recurs for real here, see appendix)</span></td></tr>
+        <tr><td class="date-cell">Thu, Aug 19, 2027</td><td>11B</td><td>Care &amp; Longevity</td><td class="dest-cell">&ldquo;<a href="https://www.tuxmat.com/blogs/articles/best-car-floor-mats-for-families-spills-mud-and-daily-chaos">Best Car Floor Mats for Families</a>&rdquo; <span style="color:#777;">(has real images)</span></td></tr>
+        <tr><td class="date-cell">Thu, Sep 2, 2027</td><td>12A</td><td>Care &amp; Longevity</td><td class="dest-cell">&ldquo;<a href="https://www.tuxmat.com/blogs/articles/best-floor-mats-for-work-trucks-what-construction-workers-actually-need">Best Floor Mats for Work Trucks</a>&rdquo;</td></tr>
+        <tr class="spotlight"><td class="date-cell">Thu, Sep 16, 2027</td><td>12B <span class="tag">Capsule spotlight</span></td><td><em>Community &amp; Belonging lens</em></td><td class="dest-cell gap-text">No blog fit by design &middot; <a href="https://www.tuxmat.com/pages/tuxmat-capsule-license-plate-case">Capsule product page</a></td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="note-box">
+      <strong>Where each pillar landed, and why it isn't even:</strong> eighteen of the twenty-four issues carry a real mat pillar; two are flagged content gaps; the other four are the Capsule spotlights below. Of those eighteen, Care &amp; Longevity leads seven, Engineering Depth five, Community &amp; Belonging three, Proof &amp; Trust three, and Design Authority zero, its two issues (February, August) are the two gaps, both routing to a shop page instead of a post. That's the honest result of matching real blog content to real pillars, not a target. Design Authority has the least existing content to point to of any pillar; if new content is worth commissioning first, those two slots are where it would help most. Two posts are held in reserve, unused this cycle: "SUV Trunk Mats: Real Cargo Coverage" (solid Engineering Depth content, simply no open slot) and "Car Floor Mats: The Complete Guide" (generic, no images, no CTA of its own, not recommended as a newsletter destination until it has both).
+    </div>
+
+    <div class="note-box" style="margin-top:14px;">
+      <strong>Capsule spotlight placement protects the mats' own selling season:</strong> only one of the four spotlights sits inside the November&ndash;December window (December 17, Care &amp; Longevity lens, corrosion-resistant hardware against the same road salt the mats are already protecting against that month), so mats keep the lion's share of attention during the year's most important selling stretch, roughly 0.2% of revenue shouldn't be claiming two of the four issues in that window. November 19 instead carries a genuine mat issue, Proof &amp; Trust warranty reassurance, timed just ahead of the gift-buying rush. The fourth spotlight lands September 16, 2027, Community &amp; Belonging lens, reframed around the fall transition rather than a holiday gift frame, early enough before the following November's gift season to read as its own feature rather than an upsell riding on the mat gift message.
+    </div>
+
+    <div class="note-box" style="margin-top:14px;">
+      <strong>On the four Capsule spotlights:</strong> one per season, each leads with Capsule instead of mats, each lens chosen for its own strongest seasonal story rather than spread evenly across all five pillars for the sake of coverage; which is why those four issues don't carry a second mat pillar, the "different pillar per issue" rule applies to the other eight months' two genuine mat-pillar issues, not to the spotlight slot. In send order: December 17, 2026 (Care &amp; Longevity lens, corrosion-resistant hardware against road salt); April 15, 2027 (Engineering Depth lens, aerospace-grade machined aluminum, the exterior counterpart to that month's spring vehicle-prep story); June 17, 2027 (Care &amp; Longevity lens, the ClearLock™ shield's UV resistance matching a summer heat and sun-exposure month); September 16, 2027 (Community &amp; Belonging lens, above). That's a 17-, 9-, 13-, and 13-week gap between spotlights in turn, spread evenly enough that no two ever land inside the same seasonal selling push again. None of the four point to a blog, since none of the 22 posts on hand are about Capsule, each drives straight to the product page. Two of the four land in Care &amp; Longevity-adjacent territory rather than one per pillar. That's deliberate. ClearLock™'s UV resistance and the hardware kit's corrosion resistance are Capsule's strongest, most literal seasonal fits, and forcing a spotlight into Design Authority or Proof &amp; Trust just to touch every pillar would be coverage for its own sake, not a real story. A plate-renewal-season rationale for a January spotlight doesn't hold up: there's no consistent, verifiable renewal season across states and provinces, and a seasonal claim needs to clear the same bar as a coverage or rating claim before it goes into a calendar, let alone into copy. A real registration-timing angle, if one exists in specific markets, would need confirmation against actual DMV or provincial data before it's used.
+    </div>
+
+    <div class="note-box" style="margin-top:14px;">
+      <strong>One more note on reuse:</strong> "TuxMat Limited Lifetime Warranty Explained" now appears twice, November 19 (gift-season reassurance) and July 1 (mid-year confidence check). Both are genuine, distinct occasions for the same evergreen trust content, not a shortcut, and it's the only post repeated anywhere in this calendar.
+    </div>
+
+    <div class="note-box" style="margin-top:14px;">
+      <strong>Geography note, unrelated to Capsule but worth flagging here:</strong> the tone-of-voice reference marks "Proudly Canadian" as a Canada-only message. It should never appear in a US-facing send, and belongs in the same data-driven conditional-module mechanism as the seasonal climate content, not remembered manually.
+    </div>
+
+    <div class="note-box" style="margin-top:14px;">
+      <strong>On the lease and new-car posts, still excluded here:</strong> "Floor Mats for Leased Cars: Avoid Turn-In Fees," "The Swap Strategy That Works," and "New Car Floor Mat Checklist, Week One" don't appear anywhere above. Lease and new-car moments are triggered by an event on the calendar, a delivery date, a lease-end date, not by the time of year, so they belong in triggered flows rather than this bi-weekly send. The two lease posts are also near-duplicates of each other; whichever team owns the triggered flows should pick one, not both.
+    </div>
+  </section>
+
+  <section id="brief">
+    <div class="eyebrow">Part 3</div>
+    <h2>Issue 1 brief (the real first live send)</h2>
+    <dl>
+      <dt>Issue</dt><dd>Issue 1 of the new pillar system, Issue A. Send date: on or near Thursday, October 1, 2026.</dd>
+      <dt>Pillar</dt><dd>Engineering Depth.</dd>
+      <dt>Angle</dt><dd>Fit and coverage decide what a mat actually protects, not the material alone. A mat cut from good material still shifts, still gaps at the edges, if it was never scanned to the exact floor pan or doesn't reach far enough to cover the real exposure area.</dd>
+      <dt>Owner-lens hook</dt><dd>Quiet confirmation that the decision they already made was the right one: the mat in their car was scanned to their exact floor pan and anchored so it can't shift, not just cut from decent material and left to sit there.</dd>
+      <dt>Subscriber-lens hook</dt><dd>A concrete, checkable claim: coverage extends up to 2.5x further than conventional mats, held in place by factory anchor points, built from a 3D scan of the exact model, not a one-size-fits-most template.</dd>
+      <dt>Primary CTA</dt><dd>Learn More, pointing to the "Why Floor Mat Fit and Coverage Matter More Than Material" blog post rather than a shop page, consistent with this pillar's blog-first approach used elsewhere in the calendar. Discover TriForce would be the wrong CTA here: TriForce is a material-construction story; this issue is about fit and coverage, not material.</dd>
+      <dt>Secondary CTA</dt><dd>Find Your Fit, module 8's standard shop-by-vehicle grid, unchanged. The hard conversion ask still runs every issue regardless of where the hero points.</dd>
+      <dt>Feature-callout (module 5)</dt><dd>Active this issue, deliberately. A macro shot of a factory anchor point engaging its mount, with leader-line labels for the anchor point, the extended coverage edge, and the laser-scanned contour line, a different visual concept from a material cross-section, so it reads as its own story rather than a repeat.</dd>
+    </dl>
+  </section>
+
+  <section id="mockup">
+    <div class="eyebrow">Part 4</div>
+    <h2>Issue 1: laid out against the real spec</h2>
+    <p class="lede">Built from TuxMat's own production spec sheet and the module library derived from actual sent issues ("Keep New Cars New," "Go All-In"), with the real logo mark. This is a browser-preview approximation for review purposes; the production build is still a table-based, email-safe HTML file, not this markup.</p>
+
+    <ul class="subject-options">
+      <li class="recommended"><span class="rec-tag">Recommended</span>Fit decides what material can't.</li>
+      <li>Scanned to your exact floor pan</li>
+      <li>The difference is in the fit</li>
+      <li>Coverage, measured, not guessed</li>
+    </ul>
+    <p style="font-size:13.5px;color:#555;max-width:680px;">Preview text: &ldquo;Extended coverage, locked in place, scanned to your model.&rdquo; &mdash; pairs with the recommended subject line.</p>
+
+    <div class="note-box" style="margin-bottom:8px;">
+      <strong>Two notes on this issue:</strong> the hero CTA points to the fit-and-coverage blog post instead of a shop page, consistent with this pillar's blog-first approach used elsewhere in the calendar; and the feature-callout module (05) is active here, a factory-anchor-point macro shot, a different visual concept from the material cross-section used at other Engineering Depth issues on the calendar. Both are addressed in the review findings below.
+    </div>
+
+    <div class="email-frame" style="margin-top:24px;">
+      <div class="module compliance-mod">
+        <div class="module-label">Module 01 &middot; Compliance bar (fixed)</div>
+        La version fran&ccedil;aise suit.
+      </div>
+      <div class="module header-mod">
+        <div class="module-label" style="color:#777;">Module 02 &middot; Header (fixed)</div>
+        <img class="logo-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAADjgAAAK/CAYAAABu2iVRAAAACXBIWXMAAC4jAAAuIwF4pT92AAAgAElEQVR4nOzdzXkbOdaAUfQ8k5fgBaNgAsxCVBZMgFFw4erIvm/hmv6xLYkUq3AvgHM2s5zbJlksFfASf9wux/8rAADAZg6n6x/RMwAAAAAAAAAAAAAAZPef6AEAAAAAAAAAAAAAAAAAgPkIHAEAAAAAAAAAAAAAAACA5gSOAAAAAAAAAAAAAAAAAEBzAkcAAAAAAAAAAAAAAAAAoDmBIwAAAAAAAAAAAAAAAADQnMARAAAAAAAAAAAAAAAAAGhO4AgAAAAAAAAAAAAAAAAANCdwBAAAAAAAAAAAAAAAAACaEzgCAAAAAAAAAAAAAAAAAM0JHAEAAAAAAAAAAAAAAACA5gSOAAAAAAAAAAAAAAAAAEBzAkcAAAAAAAAAAAAAAAAAoDmBIwAAAAAAAAAAAAAAAADQnMARAAAAAAAAAAAAAAAAAGhO4AgAAAAAAAAAAAAAAAAANCdwBAAAAAAAAAAAAAAAAACaEzgCAAAAAAAAAAAAAAAAAM0JHAEAAAAAAAAAAAAAAACA5gSOAAAAAAAAAAAAAAAAAEBzAkcAAAAAAAAAAAAAAAAAoDmBIwAAAAAAAAAAAAAAAADQnMARAAAAAAAAAAAAAAAAAGhO4AgAAAAAAAAAAAAAAAAANCdwBAAAAAAAAAAAAAAAAACaEzgCAAAAAAAAAAAAAAAAAM0JHAEAAAAAAAAAAAAAAACA5gSOAAAAAAAAAAAAAAAAAEBzAkcAAAAAAAAAAAAAAAAAoDmBIwAAAAAAAAAAAAAAAADQnMARAAAAAAAAAAAAAAAAAGhO4AgAAAAAAAAAAAAAAAAANCdwBAAAAAAAAAAAAAAAAACaEzgCAAAAAAAAAAAAAAAAAM0JHAEAAAAAAAAAAAAAAACA5gSOAAAAAAAAAAAAAAAAAEBzAkcAAAAAAAAAAAAAAAAAoDmBIwAAAAAAAAAAAAAAAADQnMARAAAAAAAAAAAAAAAAAGhO4AgAAAAAAAAAAAAAAAAANCdwBAAAAAAAAAAAAAAAAACaEzgCAAAAAAAAAAAAAAAAAM0JHAEAAAAAAAAAAAAAAACA5gSOAAAAAAAAAAAAAAAAAEBzAkcAAAAAAAAAAAAAAAAAoDmBIwAAAAAAAAAAAAAAAADQnMARAAAAAAAAAAAAAAAAAGhO4AgAAAAAAAAAAAAAAAAANCdwBAAAAAAAAAAAAAAAAACaEzgCAAAAAAAAAAAAAAAAAM0JHAEAAAAAAAAAAAAAAACA5gSOAAAAAAAAAAAAAAAAAEBzAkcAAAAAAAAAAAAAAAAAoDmBIwAAAAAAAAAAAAAAAADQnMARAAAAAAAAAAAAAAAAAGhO4AgAAAAAAAAAAAAAAAAANCdwBAAAAAAAAAAAAAAAAACaEzgCAAAAAAAAAAAAAAAAAM0JHAEAAAAAAAAAAAAAAACA5gSOAAAAAAAAAAAAAAAAAEBzAkcAAAAAAAAAAAAAAAAAoDmBIwAAAAAAAAAAAAAAAADQnMARAAAAAAAAAAAAAAAAAGhO4AgAAAAAAAAAAAAAAAAANCdwBAAAAAAAAAAAAAAAAACaEzgCAAAAAAAAAAAAAAAAAM0JHAEAAAAAAAAAAAAAAACA5gSOAAAAAAAAAAAAAAAAAEBzAkcAAAAAAAAAAAAAAAAAoDmBIwAAAAAAAAAAAAAAAADQnMARAAAAAAAAAAAAAAAAAGjuv9ED0MxSSvkzegjoxEsppUYPkdhSXE/gXq4nAAAAAAAAAAAAAADwDoHjPGop5e1wui7Bc0B6t8vxXARJH/nzcLqeo4eA7G6XYy2lvEbPAQAAAAAAAAAAAAAAWf0negCa+r7GFgDAjtbv2+/RcwAAAAAAAAAAAAAAQGYCx/mIHAFgR+JGAAAAAAAAAAAAAAC4j8BxTiJHANiBuBEAAAAAAAAAAAAAAO4ncJyXyBEANiRuBAAAAAAAAAAAAACAxwgc5yZyBIANiBsBAAAAAAAAAAAAAOBxAkdEjgDwBHEjAAAAAAAAAAAAAAB8jcCRUkSOAPAl4kYAAAAAAAAAAAAAAPg6gSP/I3IEgAeIGwEAAAAAAAAAAAAA4DkCR/5J5AgAdxA3AgAAAAAAAAAAAADA8wSO/EzkCAAfEDcCAAAAAAAAAAAAAMA2BI78jsgRAH5D3AgAAAAAAAAAAAAAANsROPIekSMA/IO4EQAAAAAAAAAAAAAAtiVw5CMiRwAo4kYAAAAAAAAAAAAAANiDwJHPiBwBmJq4EQAAAAAAAAAAAAAA9iFw5B4iRwCmJG4EAAAAAAAAAAAAAID9CBy5l8gRgKmIGwEAAAAAAAAAAAAAYF8CRx4hcgRgCuJGAAAAAAAAAAAAAADYn8CRR4kcARiauBEAAAAAAAAAAAAAANoQOPIVIkcAhiRuBAAAAAAAAAAAAACAdgSOfJXIEYChiBsBAAAAAAAAAAAAAKAtgSPPEDkCMARxIwAAAAAAAAAAAAAAtCdw5FkiRwC6Jm4EAAAAAAAAAAAAAIAYAke2IHIEoEviRgAAAAAAAAAAAAAAiCNwZCsiRwC6Im4EAAAAAAAAAAAAAIBYAke2JHIEoAviRgAAAAAAAAAAAAAAiCdwZGsiRwBSEzcCAAAAAAAAAAAAAEAOAkf2IHIEICVxIwAAAAAAAAAAAAAA5CFwZC8iRwBSETcCAAAAAAAAAAAAAEAuAkf2JHIEIAVxIwAAAAAAAAAAAAAA5CNwZG8iRwBCiRsBAAAAAAAAAAAAACAngSMtiBwBCCFuBAAAAAAAAAAAAACAvASOtCJyBKApcSMAAAAAAAAAAAAAAOQmcKQlkSMATYgbAQAAAAAAAAAAAAAgP4EjrYkcAdiVuBEAAAAAAAAAAAAAAPogcCSCyBGAXYgbAQAAAAAAAAAAAACgHwJHoogcAdiUuBEAAAAAAAAAAAAAAPoicCSSyBGATYgbAQAAAAAAAAAAAACgPwJHookcAXiKuBEAAAAAAAAAAAAAAPokcCQDkSMAXyJuBAAAAAAAAAAAAACAfgkcyULkCMBDxI0AAAAAAAAAAAAAANA3gSOZiBwBuIu4EQAAAAAAAAAAAAAA+idwJBuRIwAfEjcCAAAAAAAAAAAAAMAYBI5kJHIE4LfEjQAAAAAAAAAAAAAAMA6BI1mJHAH4F3EjAAAAAAAAAAAAAACMReBIZiJHAEop4kYAAAAAAAAAAAAAABiRwJHsRI4AkxM3prVEDwAAAAAAAAAAAAAAQN8EjvRA5AgwKXFjWt9KKX9GDwEAAAAAAAAAAAAAQN8EjvRC5AgwGXFjWt8Op+sSPQQAAAAAAAAAAAAAAP0TONITkSPAJMSNaYkbAQAAAAAAAAAAAADYjMCR3ogcAQYnbkxL3AgAAAAAAAAAAAAAwKYEjh97K6Us0UPwC5EjwKDEjWmJGwEAAAAAAAAAAAAA2JzA8ROH0/VbETlmJHIEGIy4MS1xIwAAAAAAAAAAAAAAuxA43kHkmJbIEWAQ4sa0xI0AAAAAAAAAAAAAAOxG4HgnkWNaIkeAzokb0xI3AgAAAAAAAAAAAACwK4HjA0SOaYkcATolbkxL3AgAAAAAAAAAAAAAwO4Ejg8SOaYlcgTojLgxLXEjAAAAAAAAAAAAAABNCBy/QOSYlsgRoBPixrTEjQAAAAAAAAAAAAAANCNw/CKRY1oiR4DkxI1piRsBAAAAAAAAAAAAAGhK4PgEkWNaIkeApMSNaYkbAQAAAAAAAAAAAABoTuD4JJFjWiJHgGTEjWmJGwEAAAAAAAAAAAAACCFw3IDIMS2RI0AS4sa0xI0AAAAAAAAAAAAAAIQROG5E5JiWyBEgmLgxLXEjAAAAAAAAAAAAAAChBI4bEjmmJXIECCJuTEvcCAAAAAAAAAAAAABAOIHjxkSOaYkcARoTN6YlbgQAAAAAAAAAAAAAIAWB4w5EjmmJHAEaETemJW4EAAAAAAAAAAAAACANgeNORI5piRwBdiZuTEvcCAAAAAAAAAAAAABAKgLHHYkc0xI5AuxE3JiWuBEAAAAAAAAAAAAAgHQEjjsTOaYlcgTYmLgxLXEjAAAAAAAAAAAAAAApCRwbEDmmJXIE2Ii4MS1xIwAAAAAAAAAAAAAAaQkcGxE5piVyBHiSuDEtcSMAAAAAAAAAAAAAAKkJHBsSOaYlcgT4InFjWuJGAAAAAAAAAAAAAADS+2/0ALM5nK7fbpfj91JKjZ6Ff/l+uxzFIAAPEDem5fsM6MLtcjxHzwCwgcW91zh8N+3ncLqeo2dgbuszjBo8xpB8vvvgOy4N946Eci1IwXVgIO4xY7kPBUpxLQ7mvgYG4Dqakusr6XimBAzCd2wHBI4BRI5piRwB7iRuTMv3GNCT1+gBADayRA/AZnw37eccPQDTq8VnfC/n6AG4m89AvJfi3pEg60Y014F4S/QAbKoWn6swt8vRpjSgFHsWoi3RAwBPcx3N57WU8kf0EPATf/sCo1iiB+Bj/4keYFaH0/Vb8QHJ6Psa7QDwDnFjWuJGAAAAAH6xnnC0BI9BKdWvnRNhfaZvI1q8N8/wYVOuazA599YAz7FPNi+vDQAwK4FjIJFjWiJHgHeIG9MSNwIAAADwkbfoASiliDGI4X2XwBqbA9up9nXA9F6iBwDoXI0egHfV6AEAACIIHIOJHNMSOQL8RNyYlrgRAAAAgA+tz4+W4DEopdwuR89YaWZ9rl+Dx6CUb9EDwKBq9ABADPc4AJvwYzh5eW0AgCkJHBMQOaYlcgRYiRvTEjcCAAAAcJd1PYp4TpyiJZsi4y2e48NuXONgXj7/AE/wXCI/rxEAMCOBYxIix7REjsD0xI1piRsBAAAAeJTIMQfPW9nd7XI8FycbhROXw77Wax0wnxo9AEDnavQAfKpGDwAA0JrAMRGRY1oiR2Ba4sa0xI0AAAAAPGx9prQEj0ERZNCEk43ivUUPABNwrYPJuI8G2IR7qPy8RgDAdASOyYgc0xI5AtMRN6YlbgQAAADgGYKbHF6tPbGX2+Xo2X685XC6nqOHgBn4PoXpCD4AniAU74f7XABgNgLHhESOaYkcgWmIG9MSNwIAAADwlPX5ksgxB5uz2dz6fL8Gj4HrLLTk+xQmIcoB2MRL9ADczX0uADAVgWNSIse0RI7A8MSNaYkbAQAAANjEeqrYEjwGpVSbtNmBDZDxFs/zoalqHwdMQ5QD8LwaPQB3q9EDAAC0JHBMTOSYlsgRGJa4MS1xIwAAAABbc7pYDmI0NuP0xhzWdX6grRo9ALAv9zkAz/MjS/3xmgEAMxE4JidyTEvkCAxH3JiWuBEAAACAza3PnJbgMSil3C5Hz2XZivdSPHEjxPCDATA+n3OA5zkJtz9eMwBgGgLHDogc0xI5AsMQN6YlbgQAAABgN04ZS6Nac+JZTnVIYfFMH+K4DsK4nN4IsJkaPQAPq9EDAAC0InDshMgxLZEj0D1xY1riRgAAAABaEDnm4BktX7Y+53eqUby36AFgcq6DMK4aPQBA7/wYRL+8dgDALASOHRE5piVyBLolbkxL3AgAAABAE+tzqCV4DIoNazxF1BPvzXN9iGfvBgzLvQ7A816iB+DLvHYAwBQEjp0ROaYlcgS6I25MS9wIAAAAQGtOHcvh1XoTj1rfMzV4jNkth9P1HD0EUEoRQcFw/AgIwPP83di9Gj0AAEALAscOiRzTEjkC3RA3piVuBAAAAKC59ZmUyDEHYQaP8qw/nusn5FHt24DhuD8GeF6NHoDnCP4BgBkIHDslckxL5AikJ25MS9wIAAAAQJj19LEleAx+hBnn6CHog/dKCotn+5COGAoGYQ8WwGbcH/XvJXoAAIC9CRw7JnJMS+QIpCVuTEvcCAAAAEAGTiHLwcZD7uW9EmxdswdyqdEDAJtxrwPwJHtZh+GkcgBgeALHzokc0xI5AumIG9MSNwIAAACQwvqcagkeg1LK7XL0LJcPeY+kIG6EpJxwC/1b9zfU4DEARlCjB2AzNXoAAIA9CRwHIHJMS+QIpCFuTEvcCAAAAEAqTiNLwy/z8y4b/lNYPN+H1Jz6Bv2r0QMADMJ90Ti8lgDA0ASOgxA5piVyBMKJG9MSNwIAAACQlcgxB891eY9NjfHeogcAPuYUR+ie+x2AJ9m7Oh6vKQAwMoHjQESOaYkcgTDixrTEjQAAAACktT67WoLHoIgz+NX6nqjBY8zuzTN+6MJL9ADA17gHBthMjR6AzdXoAQAA9iJwHIzIMS2RI9CcuDEtcSMAAAAAPXA6WQ6v1pj4idOMYi2H0/UcPQRwl+o7FLrlfgdgG66n4/GaAgDDEjgOSOSYlsgRaEbcmJa4EQAAAIAurM+xRI452LxGKaWU2+XouX8810Xoi+9Q6Iy9VQDbcBruuHxXAgCjEjgOSuSYlsgR2J24MS1xIwAAAABdWU8pW4LH4McJVOfoIYi1PvuvwWPMbvGcH7pTowcAHiZMBtjGS/QA7KZGDwAAsAeB48BEjmmJHIHdiBvTEjcCAAAA0CunleVgozfeA8HW9XegM34kAPrhBx0ANlWjB2A3ng8AAEMSOA5O5JiWyBHYnLgxLXEjAAAAAN1an22JHBO4XY6e/07KZv8UxI3QLxvAoR8+rwAb8AMP4/MaAwAjEjhOQOSYlsgR2Iy4MS1xIwAAAADdO5yu5+gZKKWUUq0tTcvz/1iLZ/3QNxvAoRs1egCAQbxED8DuvMYAwHAEjpMQOaYlcgSeJm5MS9wIAAAAwEicXpaDZ8GTEeWk4BRb6J8N4JCcex6ATdXoAdhdjR4AAGBrAseJiBzTEjkCXyZuTEvcCAAAAMBQ1uddS/AYFJu/Z7KuAbxGzzG5N8/7YQhOQYb83PMAbMAzg3l4rQGA0QgcJyNyTEvkCDxM3JiWuBEAAACAIa3rTMR7ta40DRv9Yy2H0/UcPQSwGddUSEqgAbApJ1fPw2sNAAxF4DghkWNaIkfgbuLGtMSNAAAAAIzuLXoASikijeGt6wA1eIzZud7BWJziCHkJNAA24O/I6dToAQAAtiRwnJTIMS2RI/ApcWNa4kYAAAAAhreeZrYEj8GPSOMcPQS7ErHGWjzzhyHV6AGAfxPjAGyqRg9AW54NAQAjEThOTOSYlsgReJe4MS1xIwAAAAAzcapZDgK4Qa0bFGvwGFNb19KB8fjuhHx8LgG245o6H6cgAwDDEDhOTuSYlsgR+IW4MS1xIwAAAABTWZ+HiRwTuF2OnhmPyabUWOJGGJhTbiCdGj0AwAjsN51W9doDAKMQOCJyzEvkCPxF3JiWuBEAAACAKR1O13P0DJRSbGQbjmg13OK5PwxPRA5JCI4BNlWjByBMjR4AAGALAkdKKSLHxESOgLgxL3EjAAAAALNzylkOnh8PYl0PqMFjzM7ptDAB+zAgDcExwHZcU+fltQcAhiBw5C8ix7REjjAxcWNa4kYAAAAAprc+I1uCx6A4/WYgNiXGevPsH6bhegvB3L8CbMf+UrwHAIARCBz5F5FjWiJHmJC4MS1xIwAAAACs1rUl4r1aS+rbusm/Bo8xs+Vwup6jhwCaqb43IdxL9AAAA6nRAxCuRg8AAPAsgSO/EDmmJXKEiYgb0xI3AgAAAMCv3qIHoJTiNKreef1iuY7BfGr0ADCrdT9EDR4DYCT+nsR7AADonsCR3xI5piVyhAmIG9MSNwIAAADAb6ynni3BY/DjNKpz9BA8zusWbvH8H6ZkEzjE8fkD2Ii/J/kfe4sBgN4JHHmXyDEtkSMMTNyYlrgRAAAAAD7m9LMcXq0j9WV9vWzyD7SuiwMTEgRAe05vBNjcS/QApFGjBwAAeIbAkQ+JHNMSOcKAxI1piRsBAAAA4BPrMzSRYw5iub54vWKJG2FursHQXo0eAGAwNXoA0nBvCwB0TeDIp0SOaYkcYSDixrTEjQAAAABwp8Ppeo6egVJKKdUaUh+cYBRusQYA+M6E5sQXABtxGjU/c28LAPRM4MhdRI5piRxhAOLGtMSNAAAAAPA4p6Hl4JlzH7xOsZw6C5QitoJmhDgAm3uJHoB03NsCAN0SOHI3kWNaIkfomLgxLXEjAAAAAHzB+lxtCR6DUsrtcvTsOTEb/MO9WQcAVk4+hnZEFwDbqtEDkE6NHgAA4KsEjjxE5JiWyBE6JG5MS9wIAAAAAE9Y15OIJ9hIan1dbPCPsxxO13P0EEAqrsmwM/elANvyozm8x3sDAOiVwJGHiRzTEjlCR8SNaYkbAQAAAGAbb9EDUEoRbGTldYnl+gT8rEYPABNw/wOwrZfoAUjLewMA6JLAkS8ROaYlcoQOiBvTEjcCAAAAwEbW09GW4DH4cYrjOXoI/rauEdTgMWa2WAsAfsf3JezH/Q/AtlxX+USNHgAA4CsEjnyZyDEtkSMkJm5MS9wIAAAAANtzSloOr9aOUnF6UaB1jRvgd1yfYT81egCAwdToAcjNj3cAAD0SOPIUkWNaIkdISNyYlrgRAAAAAHawPncTOeYg2khg3WBYg8eYmbgR+JCN4LAb96IA23Jd5TMv0QMAADxK4MjTRI5piRwhEXFjWuJGAAAAANjR4XQ9F+tIGVTrRinYhBpnsR4A3MFGcNiYcBhgW/625041egAAgEcJHNmEyDEtkSMkIG5MS9wIAAAAAG04xTEHz6kD3S5H//6xXIeAe/hBANieH3gA2FaNHoA++JEBAKA3Akc2I3JMS+QIgcSNaYkbAQAAAKCR9VncEjwGRWQXZV0rqMFjzOzNmgDwADEWbMR+JYBduFfhXt4rAEBXBI5sSuSYlsgRAogb0xI3AgAAAEBj6xoS8ZxMFcOmwjjL4XQ9Rw8BdKVGDwADcQ8EsCF/z/Mo7xkAoCcCRzYnckxL5AgNiRvTEjcCAAAAQByRYw42mjfk9MZwb9EDAP25XY7n6Bmgd+6BAHZRowegOzV6AACAewkc2YXIMS2RIzQgbkxL3AgAAAAAgdbnc0vwGPw4xfEcPcRErBfEWawLAF/kxwDgeT5HANtzbeVR3jMAQDcEjuxG5JiWyBF2JG5MS9wIAAAAADk4TS2HV+tF+xOSxlrXqwG+xDUcnlajBwAYiXsTvsrzHwCgFwJHdiVyTEvkCDsQN6YlbgQAAACAJNZndSLHHPyK/47WNQP/xnHEjcCzXqIHgF6JcAB24d6Er6rRAwAA3EPgyO5EjmmJHGFD4sa0xI0AAAAAkMzhdD0Xa0cZVGtFuxI3xlmsDQAb8D0JX+c+CGB7NXoAuuV7GQDogsCRJkSOaYkcYQPixrTEjQAAAACQl1Mcc/BsewfrukENHmNmri/AVmwGhwc5vRFge66tPMs+YQCgBwJHmhE5piVyhCeIG9MSNwIAAABAYuvzuyV4DEopt8vRM+7t+TeN82Z9ANiQUxzhcS/RAwAMyLWVZ9XoAQAAPiNwpCmRY1oiR/gCcWNa4kYAAAAA6MC6bkQ88caGnKwRajmcrufoIYDh1OgBoBdOsQbYTY0egO45mRwASE/gSHMix7REjvAAcWNa4kYAAAAA6IvIMQcb3bbj3zLOW/QAwJBc1+F+Pi8AG/MjOmzFewkAyE7gSAiRY1oiR7iDuDEtcSMAAAAAdGZ9prcEj8GPUxzP0UP07nY5WjuIs1gjAPbiOxLuVqMHABjQS/QADMN7CQBITeBIGJFjWiJH+IC4MS1xIwAAAAD0y6lrObxaI/q69d+uBo8xrXXtGWAvTqWDTwiBAbbn70w2VqMHAAD4iMCRUCLHtESO8BvixrTEjQAAAADQsfX5nsgxBwHH1/m3iyNuBHZnDwV8yr0QwPZq9ACMxQ8SAACZCRwJJ3JMS+QI/yBuTEvcCAAAAAADOJyu52K9KINqfehx6wbBGjzGrBbrBEAj4i14h1gCYDfuP9jaS/QAAADvETiSgsgxLZEjFHFjYuJGAAAAABiLUxxz8Dz8cTadxnHdAFrxIwDwPrEEwMbcd7CTGj0AAMB7BI6kIXJMS+TI1MSNaYkbAQAAAGAw6zO/JXgMSim3y9Fz8Tv5twr1Zq0AaKxGDwDZrHsqavAYACOq0QMwJicvAwBZCRxJReSYlsiRKYkb0xI3AgAAAMCg1rUi4jml6g429IdaDqfrOXoIYDpO7IVf+VwA7MP1lb04eRkASEngSDoix7REjkxF3JiWuBEAAAAAxidyzMFmys/5N4rzFj0AMCcn3sAvavQAAKOxT5Od+VErACAlgSMpiRzTEjkyBXFjWuJGAAAAAJjA+hxwCR6DHxveztFDZOX0xlCL9QIgkLgdVu4VAXZTowdgeDV6AACAnwkcSUvkmJbIkaGJG9MSNwIAAADAXJzOlsOrdaF3WUsIsq4jA4Tx3Qh/EfwC7MP1lb15jwEA6QgcSU3kmJbIkSGJG9MSNwIAAADAZNZngiLHHGx6+4nTikKJG4EMfDcyPfdDAPtwfaUVe4ABgGwEjqQnckxL5MhQxI1piRsBAAAAYFKH0/VcrBFlUK0J/W39txC2xFisGQBJ+G4E90MAe3mJHoBp1OgBAAD+SeBIF0SOaYkcGYK4MS1xIwAAAADgFMccPEP/m838cVwPgEx8HzAte4UAdlWjB2Aa7mcBgFQEjnRD5JiWyJGuiRvTEjcCAAAAAGV9TihqSuB2OU7/LH1dU6jBY8zqzboBkEyNHgACCSIAdnC7HM/RMzAXe38BgEwEjnRF5JiWyJEuiRvTEjcCAAAAAH85nK7n6BkopZRSrQfZzB9kcR0AMhIhMCM/+ACwq5foAZhOjR4AAOB/BI50R+SYlsiRrogb0xI3AgAAAAC/8y16AEopEwd+a8RSg8eYlVNcgaym/V5kajV6AICB1egBmI77WQAgDYEjXRI5piVypAvixrTEjQAAAADAb63PDpfgMfhxiuM5eoggNv3FWKwdAJlN/L3IvNwTAezAPQVR7PkFALIQONItkWNaIkdSEzemJW4EAAAAAD60rg0R73W2taDb5WhdIYjPPdCBl+gBoBXxDcCu3FMQxY8XAOT2b7sAACAASURBVAApCBzpmsgxLZEjKYkb0xI3AgAAAAD3eosegFLKRJvf1rWFGjzGrMSNQA+q/RFMZJp7QICW/N1JsBo9AABAKQJHBiByTEvkSCrixrTEjQAAAADA3Q6n67lYF8pgppjDRv4Yi/UDoCO+KxjeRPd+ABFq9ADMzSnNAEAG/40eALZwOF2/3S7H78Ufetl8v12O4iXCiRvTcn0AmJsTN/r0UvzdtYellPJn9BB8yRI9AADApN6Kv00y+F5K+SN6iD2tG/xq8Biz8uwI6EmNHgAaEPIC7Mc1lmgv0QOQmmc0fbK/Zx9Lsb+nV0v0AHxO4MgwRI5piRwJJW5My3UBYHLriRt0xsbO3fzpMwEAAPc7nK7L7XJ8KzYAhrtdjt8Pp+u36Dl25D0W480aAtCb2+V49oyPUa37LmrwGABDckIuSdToAcjL3zl9sr9nN/b3wI7+Ez0AbGldQF2i5+AX3/0hTgRxY1riRgAAAADgKTYRpFFHXQNaNwHR3uLzDXRKFM/IavQAAAOr0QNAKZ6DAADxBI4MR+SYlsiRpsSNaYkbAQAAAICtjHxyYE+GCzrWNYbh/rs68RY9AMBX2RTOwNwXAezHNZYsXqIHAADmJnBkSCLHtESONCFuTEvcCAAAAABsZn3euASPwY9THM/RQ2zMBtMYi3UEoHM2hTOcAe/zANKwl5JkavQAAMDcBI4MS+SYlsiRXYkb0xI3AgAAAACbW9eDiPc6yvrP+t9Rg8eYks8zMIA6yvch/IMffgDYT40eAP7JDxsAAJEEjgxN5JiWyJFdiBvTEjcCAAAAAHt6ix6AUso4m9+tM8QQNwKjGOX7EEQOAPtz30A23pMAQBiBI8MTOaYlcmRT4sa0xI0AAAAAwK4Op+u5WAvKoPtTq2ziD7NYSwAG0v33IfzDS/QAAKPy9ydZuZcFAKIIHJmCyDEtkSObEDemJW4EAAAAAFpximMO3T6rX9canFQQw+cXGE2NHgCetd4b1eAxAEYmIierGj0AADAngSPTEDmmJXLkKeLGtMSNAAAAAEAz6/NIkVQCt8ux12f24sYYb9YTgAH5TmEE3scA+6rRA8A73AMAACEEjkxF5JiWyJEvETemJW4EAAAAAJo7nK7n6BkopZRSe1v3cUJRmMXnFhjV7XI8R88AT6rRAwCMyn0C2fX2XAcAGIPAkemIHNMSOfIQcWNa4kYAAAAAINK36AEopfT3/N7pBDGcugqMzHcL3RLeAOzuJXoA+ESNHgAAmI/AkSmJHNMSOXIXcWNa4kYAAAAAINT6jHIJHoPSz8b4dc4aPMaMFmsKwOjsf6BjAl2AfdXoAeAT7gUAgOYEjkxL5JiWyJEPiRvTEjcCAAAAACmsa0DEe+1kzcemvQA+p8AkfMfQnV5+pAKgV66z9KKTZzoAwEAEjkxN5JiWyJHfEjemJW4EAAAAALJ5ix6AUkrysON2OVpziCFuBGZR7X2gQy/RAwAMznWWXtToAQCAuQgcmZ7IMS2RI/8ibkxL3AgAAAAApHM4Xc/F+k8GNevpFOu6Qw0eY0aLdQVgMjV6ALiX+yOAfbnO0pnUP1oFAIxH4AhF5JiYyJFSirgxMXEjAAAAAJCZUxxzyLohLutco/O5BGbj+4aeeL8C7KtGDwCPyPqjVQDAmASOsBI5piVynJy4MS1xIwAAAACQ2voMU0yVwO1yTPWc36kZYd6sLQAzsjGcjtToAQAGJySnNy/RAwAA8xA4wj+IHNMSOU5K3JiWuBEAAAAA6MLhdD0Xaz8Z1GRrPdYe2lvWzyPAjMQMpCfEBdhXsr+J4V41egAAYB4CR/iJyDEtkeNkxI1piRsBAAAAgN44xTGHFM/8bd4P43MITM1+BzogxAXYV40eAL7CcxQAoBWBI/yGyDEtkeMkxI1piRsBAAAAgO6szzWX4DEo8Zvi1vUHm/fbW6wvAPj+Ia/oezSASbgXoFcv0QMAAHMQOMI7RI5piRwHJ25MS9wIAAAAAHRrXfch3mvwOo8NpQF8/gBKKaVUex1IzD0SwI7cA9C5Gj0AADAHgSN8QOSYlshxUOLGtMSNAAAAAMAIRFY5hGygX9cgasT/9+R87gD+JiIjHftvAJqo0QPAM5z2DAC0IHCET4gc0xI5DkbcmJa4EQAAAAAYwvqscwkegx8nWJ0D/n+tQbS3WGMA+JcaPQD8hvAWYH+utft6ix5gAi/RAwAA4xM4wh1EjmmJHAchbkxL3AgAAAAAjMamtxyabu500kAYnzeAn/hOIhMnXAPsz3f//g6n67nY37u3aq8uALA3gSPcSeSYlsixc+LGtMSNAAAAAMBw1ueeoqsEbpdjy7UBp2W092adAeC3fCeRSY0eAGACTr7b17L+75+RQ0yiRg8AAIxN4AgPEDmmJXLslLgxLXEjAAAAADAsv+yfRpNf/28cUvLDsn7OAPgNJzmRiOAWYH81eoDB/VnKX8962Jf7Bv6fvbtLaiRZ1gWa+9qZF1EPGoUmwCwQs9AEGIUeCEbW94GobooC9JcZHj9rmR07trtp8CqkzFCGf+EAsCkBR7iSkGOzhBw7I9zYLOFGAAAAAGAGpji2YdN9grIXkbb8GXzJ+wvgZyY5EU7QFmB7rrXb+xRszEFlTEOPLgCwJQFHuIGQY7OEHDsh3Ngs4UYAAAAAYArlWWgOLoNl84ZP0wXqy/YaAM6qMsUYzrBOAtieQw22lT/9b4ftbC9FFwAAjEvAEW4k5NgsIcfGCTc2S7gRAAAAAJhK2esh3tMWezslOLn69+Vn3lcAFxMuI4y+GoBqUnQBg3v7+D/0vlVhDQsAbEbAEe4g5NgsIcdGCTc2S7gRAAAAAJiVMFYbtmiQ03RXn/cTwOVSdAFMzToJYGPl0B02tHt8OXzxj01x3JjeXABgKwKOcCchx2YJOTZGuLFZwo0AAAAAwLTK89EcXAbLktZs/jwd9/Yj6sv2GwCuI/hAhNK7kYLLAJjBQ3QBg8tX/nPWk6ILAADGJOAIKxBybJaQYyOEG5sl3AgAAAAA4HT/VqwySUjTfhjvI4DrmaJHhBRdAMDofC6t4u2rf6gXrgprWABgEwKOsBIhx2YJOQYTbmyWcCMAAAAAwPJv85twVgNWmryo0a6+Z3sOALcxxZEA1koA20vRBYxu9/hy+OFfe8azMT25AMAWBBxhRUKOzRJyDCLc2CzhRgAAAACAD0pjXA4ug2VJ9+zpmJIRIp9pLAXgZw/RBTAPgVqAaoTJt5Xv/Pfcz2scAFidgCOsTMixWUKOlQk3Nku4EQAAAADga074b8M9ewv2JerzvgG4z13hfriSMALAxtzXq3j76V/qjasiRRcAAIxHwBE2IOTYLCHHSoQbmyXcCAAAAADwjfL8NAeXwXLbdCETiUJk+w4AqxA6Y3PWSgDVpOgCRrd7fDlc8GUO49mYtQUAsDYBR9iIkGOzhBw3JtzYLOFGAAAAAIAzyv4O8Z6u2c8pXyscUpn3C8BqTHGkhofoAgAm4bPptvLKX8ftrC0AgFUJOMKGhBybJeS4EeHGZgk3AgAAAABcTmirDdc0hWogrc/7BGBdKboAxlV6OVJwGQDD05NYxdslX6RXrooUXQAAMBYBR9iYkGOzhBxXJtzYLOFGAAAAAIArlGeqObgM3qdZHc59kYb9ENneA8DqhPXZktcXQB0puoDR7R5fDld8+fNWdfDukuc2AACXEnCECoQcmyXkuBLhxmYJNwIAAAAA3EYTXBsuacbXsF+f9wfABjSIs6EUXQDAJHw+3Vbe+Ou53kN0AQDAOAQcoRIhx2YJOd5JuLFZwo0AAAAAADcqz1eFuBpwOu6/3YMoQZBUrRiWZVme7T8AbEYogtUJzgLU4Xpbxds1X+yzaxUpugAAYBwCjlCRkGOzhBxvJNzYLOFGAAAAAIA77R5fDot9nRakH/ZxBEHqyuV9AcBG9C6wAeslgDpMstvYjZ9HHV61MeFeAGAtAo5QmZBjs4QcryTc2CzhRgAAAACA9WiEa8Nf+xE/TXZkM94PANsTRmM1AgcAVaXoAgaXK/93XM76FQBYhYAjBBBybJaQ44WEG5sl3AgAAAAAsKLyzFWoqwEfG/TLPkWKqmVS2R4EQBU/TS6Ga5kmBlCBQHkVb7f8R+VzbF61Ev5i/QoArEHAEYIIOTbrdfGA95yHRbixRcKNAAAAAAAb2D2+HKJrYFmWZXn60DBnOkBlZW8TgDpSdAH0z4EQAFXpN9zYnc9mbgpHcpUUXQAA0D8BRwgk5NisFF1A41J0AfxFuBEAAAAAYFvCXW14KpMxUnAds/H6B6hLkJ81eB0B1JOiCxjc8z3/sYOrqrDuAADuJuAIwYQcgTsJNwIAAAAAbKw8h83BZfDeNKpprq5sHwKgvhLoh3uk6AIAZuCeXUVu5HvwgzI9GgDgZgKO0AAhR+BGwo0AAAAAAJWU/RyYzV2TMgC4mUA/NxO2AajqIbqA0a3UH/e2wvfgZym6AACgbwKO0AghR+BKwo0AAAAAAPUJezGTZ3sRAHFMweEOArIAFZR7dQouY3SrPIfZPb4c1vg+/Mj6AwC4i4AjNETIEbiQcCMAAAAAQIDSEJeDy4AasgZQgHCaxLma6Y0AVaXoAiaQG/1efMEBHQDAPQQcoTFCjsAZwo0AAAAAALFMcWQGXucA8ZImcW4gGAtQj2vuxlbuk3tb8XvxtRRdAADQLwFHaJCQI/AN4UYAAAAAgGDlOa3wFyPL9iMAmiE4wcUEYgHqcc2tYtVnL7vHl8Oa348vWbsCADcTcIRGCTkCnwg3AgAAAAA0QlMcIyv7lAC0IUUXQFeECgDqSdEFTCB38j354HTcH6JrAAD6JOAIDRNyBArhRgAAAACA9giBMSKva4DGaBLnEmWSWAouA2AmQuUb26hf7m2D78mfHqILAAD6JOAIjRNyhOkJNwIAAAAANKg8u83BZcCasj0JgCYJUHCJFF0AwCxKqJxtPW/xTXePL4ctvi9/SNEFAAB9EnCEDgg5wrSEGwEAAAAAGlb2cGAUmzSQAnA/Uxy5gCAsQD0puoAJ5E6/N4u1KwBwGwFH6ISQI0xHuBEAAAAAoA9CYYzg2b4EQNMeogugXUIEANUJlW9s48+nbxt+b95ZuwIAVxNwhI4IOcI0hBsBAAAAADqxe3w5LPZv6Fsur2MA2pVOx32KLoJmCdoAVCJUXsWmB0n5/FtFii4AAOiPgCN0RsgRhifcCAAAAADQH1Mc6ZnXL0AfhNj4i+ArQHUm020vD/IzpiYMDABcS8AROiTkCMMSbgQAAAAA6FB5tiskRo+yvQmAbqToAmiS4CtAXSm6gNFV+ozqGc72hIEBgKsIOEKnhBxhOMKNAAAAAAAd2z2+HKJrgGuVPUcAOmESDh+V6Y0puAyAabgPV1EleKhPr4pk0jQAcA0BR+iYkCMMQ7gRAAAAAGAMwmL0xOsVoD+m9fFRii4AYDIm0m0vV/xZpjhuL0UXAAD0Q8AROifkCN0TbgQAAAAAGER53puDy4BLZPsTAH0yPYoPBF4B6krRBYyu8ufUmj9rVtYqAMDFBBxhAEKO0C3hRgAAAACAwZR9G2idSRUA/TI9CkFXgMpcd6uo+jlV314dp+M+RdcAAPRBwBEGIeQI3RFuBAAAAAAYl/AYLXu2RwHQtaRRnMVEJIDaHDCwvRzwMz2/2V6KLgAA6IOAIwxEyBG6IdwIAAAAADCw3ePLYbFnQ5tyeX0C0DfhtomZIgZQVzlYIAWXMbygfrqInzkb61YA4CICjjAYIUdonnAjAAAAAMAcTAGgRV6XAGMwxXFupogB1JWiC5hAyGdVfXx1WLcCAJcQcIQBCTlCs4QbAQAAAAAmUZ4HC5PRkmyfAmAoKboA6jNFDCCECXTby4E/27Ob7aXoAgCA9gk4wqCEHKE5wo0AAAAAAJPZPb4cFvs1NKLsHwIwDmGLOfm9A1Rk8lwV0YfxRP7sWVi/AABnCTjCwIQcoRnCjQAAAAAA8zIJgBYINwIM6HTcH6JroLoUXQDAZFJ0ARN4i/zh+vrqEBYGAM4RcITBCTlCOOFGAAAAAICJlWfEObgM5hY9DQOA7ZiGMxGBVoAQ7rUb2z2+HKJrWBxOVYP3EgDwIwFHmICQI4QRbgQAAAAA4PdeDUTRqAkwMNNwpiIYAFCRe2wVObqAIkcXMIEUXQAA0DYBR5iEkCNUJ9wIAAAAAMBHQo5EeLZfATA8obcJmN4IECJFFzCBt+gClmVZfG6uw3oGAPiJgCNMRMgRqhFuBAAAAADgD+W5cQ4ug7nk3ePLIboIADaXTJiawkN0AQATcojAxhr7zPocXcAErGcAgG8JOMJkhBxhc8KNAAAAAAB8R7McNXm9AcwjRRfAdkqANQWXATAVk+aqyNEFfJKjC5hAii4AAGiXgCNMSMgRNiPcCAAAAADAt8ozZKEzasj2LACmYsLU2Px+AeozaW57b9EFfFQ+Q+fgMoYnPAwAfEfAESYl5AirE24EAAAAAOCs3ePLYbFHw8bKXiAAE9EsPrQUXQDAhFJ0AaMrz0da01ToclDCwwDAlwQcYWJCjrAa4UYAAAAAAK5hiiNbEm4EmJMpfwMSXAWoz7W3ihxdwFcaDV2OJkUXAAC0ScARJifkCHcTbgQAAAAA4CrluXIOLoMxZfsWAPM6HfcpugZWJ7gKUJ8Jc9treVJiji5gdELEAMBXBBwBIUe4nXAjAAAAAAA3KfszsDbTQQHmJgw3EM3/AGFSdAGja3xSYsvhy1FYswIAfxFwBJZlEXKEGwg3AgAAAABwLyFH1vRs7wJgeskUx6Fo/geoTLi8ihxdwE8aD18Ow5oVAPhMwBH4l5AjXEy4EQAAAACAu5VnzTm4DMaQNWECUAjFDUDTP0CYh+gCJtDDhMQcXcAEUnQBAEBbBByBPwg5wlnCjQAAAAAArOk5ugCG4HUEwG8pugBWIagKUFkJl6fgMobXyeE8PYQwe2etAwD8QcAR+IuQI3xLuBEAAAAAgFWV587Cadwj278A4KPTcX+IroHbCdgAhEnRBUwgRxdwiU5CmN0zsRoA+EjAEfiSkCP8RbgRAAAAAIBNlMa5HFwGnSr7egDwkYk4fUvRBQBMyv1zez1NRszRBUwgRRcAALRDwBH4lpAj/Eu4EQAAAACArZniyC2EGwH4kimOXROwAajMJLk6OpuM2FMYs1fWPADAvwQcgR8JOYJwIwAAAAAA2yvPonNwGfQl28MA4AcP0QVwPcFUgDApuoAJ5OgCrtFZGLNbwsUAwG8CjsBZQo5MTLgRAAAAAIBqyp4MXMrUTwB+kjSMd8kkI4AYrr/b63EiYo4uYAIpugAAoA0CjsBFhByZkHAjAAAAAAARhBy5xLN9DAAuIKzREYFUgBiuv3V0OhGxx1Bmb6xXAYBlWQQcgSsIOTIR4UYAAAAAAEKU59M5uAzaljttDAWgvhRdAFfR4A8QI0UXMIEcXcAtfPau43TcH6JrAADiCTgCVxFyZALCjQAAAAAARHuOLoCmeX0AcDEN430o08NScBkAsxIw317PkxBzdAETeIguAACIJ+AIXE3IkYEJNwIAAAAAEK48qxZi4yvZXgYAVxLa6EOKLgBgRiVgzsY6n4To+cz2UnQBAEA8AUfgJkKODEi4EQAAAACAZpTmvxxcBo0pe3QAcBVTHLsgiAoQw/V3e10HBPUU1mG9CgAIOAI3E3JkIMKNAAAAAAC0qOsmQFYn3AjArR6iC+B7GvoBQqXoAiaQowtYgecz27NeBYDJCTgCdxFyZADCjQAAAAAANKk8v9ZEx7IsS7afAcAd0um4T9FF8C3TwwACCJjXMchn2RxdwARSdAEAQCwBR+BuQo50TLgRAAAAAICm7R5fDtE10ARBVwDuJUTXIOEagFAmxm1viM+yegzrsC4CgLkJOAKrEHKkQ8KNAAAAAAD04ld0AYR6tqcBwApMcWyTcA1AnBRdwARydAErGiKs2TjrIgCYmIAjsBohRzoi3AgAAAAAQDfKM+0cXAYxsimeAKwoRRfAf0rgNAWXATAlk+LqGKxHL0cXMAEHcgDAxAQcgVUJOdIB4UYAAAAAALpT9mCYjwkRAKzpKboA/uD3ARDHpLjtDfV5Vs9hNSm6AAAghoAjsDohRxom3AgAAAAAQM+Gag7krGxfA4C1mVjVlBRdAMDEUnQBE8jRBWzAc5ntOQACACYl4AhsQsiRBgk3AgAAAADQtd3jy2Gx/zINUzsB2Iim8QYImgLEcQ2uY9BevRxdwAxOx32KrgEAqE/AEdiMkCMNEW4EAAAAAGAUpgXMwe8ZgM1oGm+CoClAHNfg7Q35mVYPYjUpugAAoD4BR2BTQo40QLgRAAAAAIBhlGfeQzYK8q9cpnUCwFYEOwKZHAYQR8i/mhxdwIY8k9metSoATEjAEdickCOBhBsBAAAAABiO8NvwNEsCsLUk4BHqIboAgIml6AJmMHjPXo4uYAbWqgAwHwFHoAohRwIINwIAAAAAMLJf0QWwiWf7GwBUkqILmFFp1k/BZQDMzGS47Q19aI/P7NWk6AIAgLoEHIFqhBypSLgRAAAAAIChlefgObgMVmY6JwAVCXjE8PcOEMREuGpydAEVDB3ibIQ1EwBMRsARqErIkQqEGwEAAAAAmELZd2Ecfp8AVHU67g/RNUwoRRcAMLEUXcAMJundy9EFzEAoGQDmIuAIVCfkyIaEGwEAAAAAmI2pAWPI9jgACGAyTkUCpQDh3Pe2N8UzivL5PQeXMQPvWQCYiIAjEELIkQ0INwIAAAAAMJ3d48thsefSPdM4AYhiMk5VmvQBgrjfVZOjC6joLbqACaToAgCAegQcgTBCjqxIuBEAAAAAgJlNMSFhYH5/AEQSuqvA9EaAcO53FczUw1cOnGJj1lAAMA8BRyCUkCMrEG4EAAAAAGBq5Tm5kFyfsqZIAIIlU62qEKwBiJWiC5jAjM8lcnQBE3iILgAAqEPAEQgn5MgdhBsBAAAAAGAxOaBjMzaAAvwkRxcwKeG7DQmQAsQyAa6aHF1AgLfoAiaQogsAAOoQcASaIOTIDYQbAQAAAADgT7+iC+Aqz/Y6AP4i+B0jRRcwOAHSGK4nwG8mwFUw4+dbh03VIaQMAHMQcASaIeTIFYQbAQAAAADgk/LsPAeXwYU0QgL8zb0sjsbxbZTpjSm4jFnl6AKAZqToAiYwc6g8RxcwASFlAJiAgCPQFCFHLiDcCAAAAAAA3yh7LbTP7wnge2/RBUzKlMFtpOgCJpX1lgDLIsBfUY4uIJC16/ZSdAEAwPYEHIHmCDnyA+FGAAAAAAA4b+bJCT3QcA/wAxNu4wiBbEJwNIb1MPCbyW8VzPwZ19q1DutUABifgCPQJCFHviDcCAAAAAAAFyjNdTm4DL5hyibARYSTYgiBrEgjfhiHSQAfpegCJmDd5hlMDQ6NAIDBCTgCzRJy5APhRgAAAAAAuI4Gwzb5vQBcwCScMOl03KfoIgaiET/GW3QBQBsEzeuwbluWxb2nCutUABibgCPQNCFHFuFGAAAAAAC4Wnm2LkzXlqzxE+Aq7mMxhPJWoAE/jvUW8IF72vZydAEtcO+pJkUXAABsR8ARaJ6Q49SEGwEAAAAA4EalwS4Hl8F/BHUArpOjC5hUii5gEEI1May3gGVZBM0rMrnwPzm6gAlYXwHAwAQcgS4IOU5JuBEAAAAAABiGfQ+A65TrZg4uY0qn4/4QXUPPSqgmBZcxJRO0gA9SdAEzcN39g7BnBcLLADAuAUegG0KOUxFuBAAAAACAO5VwQgoug+J03L9G1wDQIdPYYpiOc58UXcCkcnQBQFPcy7aXowtoibBnNSm6AABgGwKOQFeEHKcg3AgAAAAAAOvQ0NmWZNIAwHXsHccxxfEu1mAxBKKBZVlMeKvIxMK/5egCJmCdBQCDEnAEuiPkODThRgAAAAAAWIFpgc3yewG4ntBSjIfoAnokGBom6zcBPkjRBczAxMIvWbdWIMQMAGMScAS6JOQ4JOFGAAAAAABYQWn0SsFl8A3BB4DraJ4PY/LwbUwVimGKGPCRa/H2cnQBLdL/WI33OAAMSMAR6JaQ41CEGwEAAAAAYD2mBLbtSWAE4Gqm4cTQPH4FhxjEEYQGfvNZqxrB8u9Zt24vRRcAAKxPwBHompDjEIQbAQAAAABgJRrruyEwAnCdHF3ApExxvM5DdAGTEiQBPvJZqwLB8h/l6AJm4PkXAIxHwBHonpBj14QbAQAAAABgJSWAoJmzD0kzHsDlyr5yDi5jVim6gB6UdVgKLmNKQjbAJym6gAnk6AJaph+yGgdLAMBgBByBIQg5dkm4EQAAAAAA1iXc2Be/L4DrmNIWw/3qMv6eYuToAoB2OESmmrfoAjpg3bq9FF0AALAuAUdgGEKOXRFuBAAAAACAFZVGzhRcBlc6Hfev0TUA9MIecxyBkYuk6AImJUACfGSiWwUm514kRxcwA2tUABiLgCMwFCHHLgg3AgAAAADA+kwN6lM6HfcpugiAjggzxbDO+IHm+jBZ/wnwSYouYAI5uoAeuD9VI9QMAAMRcASGI+TYNOFGAAAAAABYmSmA3fP7A7iQiUFxBPJ/JAAa4y26AKAdwubVuPZezsEc20vRBQAA6xFwBIYk5Ngk4UYAAAAAAFhZCRuk4DK4k2ZcgKtoFo8hxPcF9/A4As/AJya5VeDae5UcXcAMrMUAYBwCjsCwhBybItwIAAAAAADbMP1vDE8mYwFcLEcXMKnkXvUlgZoYgs7AZym6gAnk6AJ6ol+yGmsxABiEgCMwNCHHJgg3AgAAAADABpxSPxyTsQAuUPafc3AZs0rRBbTEJO04JogBH/lsXM1bdAEdEsjfnkM4AGAQAo7A8IQcQwk3AgAAAADABkrzlkDcWJLGXICLaRaPYe3xJ38fMXJ0AUBzXI8rEC6/SY4uYBIpugAA4H4CjsAUhBxDCDcCAAAAAMB2vLfXTgAAIABJREFUNHCOye8V4AL2ouMI4/8hRRcwKQFn4F8mt1WTowvokTVrNZ6lAMAABByBaQg5ViXcCAAAAAAAGynBghRcBhs5Hfev0TUAdELIKYYG8kXQM1DWjwJ8kqILmMRbdAEds2atQNgZAPon4AhMRcixCuFGAAAAAADYlmDB2JLGPIDzdo8vh+gaZuU+tSyL9VgUIRHgM9fjCqy77pKjC5hEii4AALiPgCMwHSHHTQk3AgAAAADAhkz3m4bfM8BlhJ1iTB0mMb0xjp4U4COB+2pydAE9K/euHFzGDKZenwLACAQcgSkJOW5CuBEAAAAAADZUmjdTcBlUIjwBcJ5pQmFmnzasgT6GQDPwWYouYBKuv/d7iy5gBpOvTwGgewKOwLSEHFcl3AgAAAAAANsz1W8uT5rzAC6SowuY1JQhP/fmOALNwBemvBfVpi/wfu5h1aToAgCA2wk4AlMTclyFcCMAAAAAAGzsdNwLN85Jwy7AeaYKxUjRBQRxb47hfQ78QeC8Gtff9eToAiZgnQYAHRNwBKYn5HgX4UYAAAAAANhYadxMwWUQI52O+0N0EQAtK3vWObiMKc12j7ImC5WjCwCaI8hUR44uYCBv0QXMYLb1KQCMRMARYBFyvJFwIwAAAAAA1KFxc25+/wDnaRiPMds9KkUXMKmsPwX4QoouYAauv+vZPb4comuYxEN0AQDAbQQcAQohx6sINwIAAAAAQAXl5PkUXAbBTsf9a3QNAC3TMB5nsik5swU6W/EcXQDQlsnuPZFcf9eXowuYQIouAAC4jYAjwAdCjhd5Fm4EAAAAAIDtnY77tGik510qrwcAvqcJP8YUU3KEaeLoUQG+MMW9pwE5uoABmTpegXUbAPRJwBHgbz5EAgAAAAAALRBu5CNTHAF+YIpjmFlC+NZlMQSXga+k6AJmIGC+PuvVaoSgAaBDAo4AAAAAAAAAjSlBgRRcBo0xhQDgrBxdwKSGDv9NEuBskiAI8JnPRNUImG8nRxcwgRRdAABwPQFHAAAAAAAAgPaY1sdXnoQsAH6kGT9Gii5gY0MHOBvm/Qx8xWS2OnJ0AQN7iy5gBsLQANAfAUcAAAAAAACAhpyOe+FGfiJkAfCN3eNLXjTkhxi1idxU7VA5ugCgSSm6gBmUNRUbMJ24GmFoAOiMgCMAAAAAAABAIzTRc4E0aogEYCWm4sQYNYCfoguYVBauAT7zOagaE3S3l6MLmECKLgAAuI6AIwAAAAAAAEA7Rg0HsC6vE4BvmIoTZ9DgiXtuDOEa4CuuyXXk6AIm4ECOCgZdmwLAsAQcAQAAAAAAABpQGq9ScBl04nTcv0bXANAw4agYD9EFrElTfBzTG4HPTsd9iq5hFq7B23MgRzVC0QDQEQFHAAAAAAAAgGClWVPjFddImnwBvqZpPMxo9yZrsxgCysBXUnQBk3ANridHFzCDwdamADA0AUcAAAAAAACAeBrouYUpjgDfy9EFTGqINY3pjXEElIFvDHF/6UCOLmAiwqR1pOgCAIDLCDgCAAAAAAAABCqnyafgMuiUAAbAtzSNxxhliuNDdAGT8r4F/jLIfaULu8eXHF3DLPxdVyMcDQCdEHAEAAAAAAAAiGUKH/d40vAL8LfSNJ6Dy5hVii7gHg6fiGN6I/CNFF3AJITM6/N3XoFnJgDQBwFHAAAAAAAAgCCn4164kTWYSADwNU3jMXq/L/Vef69ydAFAs1yX68jRBUwoRxcwiRRdAABwnoAjAAAAAAAAQADTgVhROh33h+giAFpTpjgSoPP7UoouYFICycBfTF6rx7qpPn/n1QhJA0AHBBwBAAAAAAAAYmiwYk1eTwBfE5qK0eV9qfNgZs+ykAfwjS7vJx2yXorj774CYWkAaJ+AIwAAAAAAAEBlpXk+BZfBYE7H/Wt0DQCt2T2+HKJrmFWnjeSCNDHeogsAmpWiC5hEji5gYjm6gElY4wFA4wQcAQAAAAAAACoqzf4aq9hC6jRMArA1k3FidLXeMb0xjiAy8BXX5XpM0Y3j776aFF0AAPAzAUcAAAAAAACAurpq9qc7pjgC/C1HFzCp3oL3D9EFTEoAGfiO63IdrsPx/A4qEJoGgLYJOAIAAAAAAABUUpqpUnAZDE7THsCfymScHFzGrFJ0AZcoQcwUXMaUTG8EfpCiC5iB63ATcnQBkxCaBoCG/V90AQAAAAAAAAATMb2RGp5Ox30ugR4A3j0vghIRnpZlOUQXcQFrtBg5ugCgTQ5tqed03P8TXQNUkqILAAC+Z4IjAAAAAAAAQAWn4/41ugamIqgB8IHQd5xOQiopuoBJPUcXADTLpDVgdZ2sSwFgSgKOAAAAAAAAABs7Hfdp0ThPXUnjHsBfhKliNB26d78MY9o08JMUXQAwJOFpAGiUgCMAAAAAAADA9kxvJELTgRKA2naPL4foGmZVDntolftljLfoAoA2CZ4DG0rRBQAAXxNwBAAAAAAAANiQ5kwinY574VqAP5niGKPJEKF1WhyBY+AHTd4zgDFY/wFAmwQcAQAAAAAAADZSphVpziRSanxqFkBtObqASbV6P7JOiyFoDHyp0XsFMJaH6AIAgL8JOAIAAAAAAHCtHF0AdETTPC0wxRGg2D2+5MV6NkpT6yIhmjimNwI/SNEFAMNr9eANAJiagCMAAAAAAADXeosuAHpwOu4Pi+ZMGlFejwC8Mz0uRoou4JOmApcTydEFAE1zbQZqSNEFAAB/EnAEAAAAAAAA2IbGTFryZEIBwLsyxZEArQTuyz0xBZcxKwFj4Es+rwAVeWYHAI0RcAQAAAAAAABY2em4f42uAb6ggQ/gP0JWMVq5F6XoAiaVBYyBH6ToAoB5CFUDQFsEHAEAAAAAAABWZCIQDUutTM4CiLZ7fDlE1zCrRu5FrQQtZyNYDPzEtRmoKUUXAAD8R8ARAAAAAAAAYF2mN9IyTcMA/xG2ivEQ+cMbCVhOyfRG4DsmqQEBPB8BgIYIOAIAAAAAACPTpABUpWGeHpyOeyFcgMUUx0ApOMjic2IMgWLgJ67NQHXC1QDQDgFHAAAAAAANVpuxOQzATMp9T1MmPYgOlgC0JEcXMKmQNZP7XxyBYuCMFF0AMKUUXQAA8E7AEQAAAACALaXoAgCgIuFGemKKI8A7hx7FSEE/13othvcZ8K3TcX+IrgGYlrUhADRCwBEAAAAAAADgTqUhMwWXAVfRSAywLLvHl7yY4hii9n2oTG9MNX8m/8rRBQBNe4guAJiXZyMA0AYBRwAAAAAAAID7OfGdHj2VsAfA7N6iC5hU7fVTqvzzeJdLkBjgOym6AGBqQtYA0AABRwAAAAAAYEgCG0Atp+P+NboGuINwLjC93ePLIbqGWVWemOOeF+M5ugCgXSanAQ1I0QUAAAKOAAAAAABsy8m3RErRBQwsRxcArShh6hRcBtwjORQAYFkWIawoVZ4bCNDEMb0ROMPzYyCctSIAxBNwBAAAAABgSym6AGB9GlThD6Y3MgKvY2B6pjiGqRW0N70xhuAwcE6KLgBgEbYGgHACjgAAAAAAAAA3cLo7Izkd90KOACaVR9k0fGjNFkdwGPiJ6zPQkBRdAADMTsARAAAAAEADI4zKqcvAZsqkIZOAGEmtCVoALTNtLsbW9yCfDWN4PwHn+EwNNEPoGgBiCTgCAAAAANPbPb7k6BpGplGeQCm6AGBoGjEZkdc1MLXyfCAHlzGrtMU3Lc8kNvnenJWjCwDa5Zkx0CCHYgBAIAFHAAAAAAC2lqILAIA1lRPdU3AZsIVkYgHA8hZdwKS2CtkL78fIDhQDzkjRBQB8kqILAICZCTgCAAAAAADDcQr8pnJ0ARCpXF80yjOyJ/dRYGa7x5dDdA2z2ihknzb4npz3HF0A0Dyfq4HmOPQJAOIIOAIAAAAAsLWH6AKYUoouYGAm2jA7TZjMwOscmJ1wVoxV7z8a1OOY3gj8xIEqQMM8DwGAIAKOAAAAAABsLUUXAABrKE2YKbgMqCFpOgZmZopjnJXvPxrUYwgIA+ek6AIAvuN5CADEEHAEAAAAAHin+QrGYnIosIXX6AKgIq93YHY5uoBJrRJKNL0xjoAwcAEBdKBlKboAAJiRgCMAAAAAAJvTWEiAFF0AMJbTcS/sxXS87oHJOQgpxlpThB16E8P7BviRyWhAB4SwASCAgCMAAAAAADAUjVLbMo2DGZXrSgouYzaa49uwVsgEoDu7x5e8mOIYJd3zH1u7xfF5EbiA4BDQPM9CAKA+AUcAAAAAAGowOYGaUnQBwHA0YNaVS3N8Dq6Dd17/wMwE7mPce+9x74qRowsAupCiCwC4QIouAABmI+AIAAAAALA4Yb6CFF0AANzidNwfFvexqnaPL78+/n/CpfI+AJhOmeJIgDvvPWmlMriOQDDwI58rgI44MAMAKhNwBAAAAACgitNxn6JrYBqaD4BVlHuXa0pdnxvjhRzb8GQtB0xMaCvGTWsw4ZkwWSAYuMBDdAEAl/IcBADqEnAEAAAAAKCWFF0A49N0sDnN3cxGuLGu/HmqdmmUzxHF8BfvB2BKn+9N1HPj5zv3qxhv0QUAXUjRBQBcwboSACoScAQAAAAAoBYndFNDii4AGENpqE/BZczmuxC1cHUbkoMEgIm5F8W4qqnc9MY4gsDAOa7RQIdSdAEAMBMBRwAAAACA/2hY3FaKLoApCNICa3mNLmAyuUxr/Ev559ZpbfC+AGaVowuY1LXhelN2YlinAZfwzA7ojnA2ANQj4AgAAAAAQDU2g6kgRRcwMlM5mMXpuBfiqu/Hxvhy/clVKuFH3h/AjErYPgeXMauLQoumDMfxORG4UIouAOAGwtkAUImAIwAAAAAANdkMZjMCtMAaSnN8Ci5jNs/fTW/8/HVbF8JFrp2mBTAK96EY6cKvM70xRo4uAGifZ3ZAx1J0AQAwCwFHAAAAAIDCifNVpOgCGJoALbAGzfGVXboGKyFI4ZI2eJ8A07kwjM8GzgVjHFARytoMuITPD0C3hLQBoA4BRwAAAAAAqrIZzIZSdAGD07jK8Mo9KgWXMZtf13yxAymakazpgElZE8c4F4xJNYrgL1nwFzjH9HdgAA5WBIAKBBwBAAAAAKjNZjCrE7IA7lWaLk2VqOvWpvirQpFs5kmzMjAbQfs4Zz7zWcPFeIsuAOhCii4A4E4pugAAmIGAIwAAAADAn0xj2F6KLoAhCc4C99IYX99N664SisyrVsKtvG+AGXluEOPLz3wOu4kj8AtcyGcGoHvWnACwPQFHAAAAAACqsxnMmsr0qBRcxvA0rzIy15EQt05vXJZlWXaPL6Y4tiGZ4ghMKEcXMKnv7jmCMzEEfYGzfFYABuKARQDYmIAjAAAAAAARNCCyphRdANC91+gCZrNSQFFjfRu8f4CpmCQc6o9nCYIzcRyAA1woRRcAsBIHPAHAxgQcAQAAAAA+0KBVj81gViQwu70cXQBs5XTcC2fVt0owsazb8hrfi/t4HwETErKPkT79b58FY+ToAoBuuE4DI0nRBQDAyAQcAQAAAACIosGFu52O+0N0DZN4iy4AtlDC9im4jNnklQ+UEDBpg0kGwFTKFEcC/P4MaB0XyvoLOMvnA2BA9rQAYEMCjgAAAAAAf8vRBUxCIzxr0FRQR44uADbiGlLfqg3xJWCiyb4N3k/AbNx/Yvy+36TIIiaWBXyBC/l8AAzHnhYAbEfAEQAAAADgbyaV1ZOiC6Bfmgnq0cDKiMr0nxRcxmw2aYhfeSIkt0smKwMzcf+JU+43gjMxBHuBS6XoAgA2kKILAIBRCTgCAAAAAPwtRxcwEQ2J3MPrB7hJCUi7htS3ZUP8rw2/N5d7cgABMBlhrxjWcUEcfgNcwsEnwMCsQwFgIwKOAAAAAACfaNaqS8MLtyjhiRRcxiw0bTMizUj1PW+5xirfe7Pvz1W8v4BpmOLIZHw2BC71EF0AwFYc7AQA2xBwBAAAAAAgmkk/3OI1ugCgTyVYn4LLmE6NAMju8cUUxzYkaztgMjm6AKhBoBe4QoouAGBDKboAABiRgCMAAAAAwNecSl+XST9czNTPujSxMiD3nPpqBg+t4drgIAJgJu49zMDrHLiI53bABDxbBIANCDgCAAAAANACk364hgYC4Can417oqr68e3zJtX5YCWVX+3l8z/sNmEW5z+XgMmBrOboAoBsP0QUAbE2YGwDW93/RBQAAAAAAtGj3+HI4HfdCVHU9LRrmOENYojpTOhhGCdKn4DJmFHEdeV78rluQTsd9qhlwBQj0trj3MK6qB1YA3UvRBQBUIMwNQFVn9riG+Nwu4AgAAAAAQCvS6bg/lMlL8BfhJOBOAtL1hWyq7x5f8um4f15M/G2BAyyAKTgkicE5+Aa4iIlmwERSdAEAjOXTPvjDct295ul03H/+Z3l5P5BrWToJQAo4AgAAAAB8T2N8fU+n476LB+yE8H6sTOCYUWiyjLF7fPkV+LMFTdrgAAtgJp4hMCTPaIAruA8C0/C8A4B7fAg0XhtmvNTv778s/wUg8/IeemyyH+P/RRcAAAAAANCwHF3ApDTC8JfTcf+6OBW5thxdAKyhbBK7t9TXwqSfsIAlf3gq70OAoWluZlAtrOmADljzAxN6iC4AgL6cjvt0Ou4Pp+P+n2VZXpf3vatUsYRUfubr6bj/p9RS8+f/SMARAAAAAOAbLZ5aN4lk0hYffTjBkrreoguAlQg31pdbCHmUtVwOLoN33ofALHJ0AbCmFtZ0QDdSdAEAlaXoAgDowxehxlb8EXaMLkbAEQAAAADgZzm6gEmZ9MNHr9EFTCpHFwD3KhuyKbiMGTUz6Wf3+GKKYxuStR0wiWbugbACr2fgGi01agNU0UIYBIB2fQg29rBWfipBx9eoZ/n/F/FDAQAAAAA68rYIRkR5XZblf9FFEOt03As3BjHFlkH0sGk8mtzg9eN58VpogbUdMLzd40s+Hfd58RyBMeToAoA+OMwEmNhDdAEAtKcE4Nfck7j0AKI1fmZa3g8szMuyPNfc7xFwBAAAAAD4we7x5XA67jXEBzkd968mL82rhBtTdB2TMqmD7glIh2nu+lHWcw+Le0o4aztgEg5KYgQtHloBtCtFFwAQJEUXAEA7Vgg2/t5fufUz+eFDLWn57z51S01peQ86Pu8eXw5nvnYVAo4AAAAAALQsaYSf06dNF+rL0QXAPVxDwlQ9zfdKz4vXRAvS6bhPDb9OAO7moCQG0dyhFUDT3PeAaZ2O+0Ot4AcAbSp7UrccupmXZXnb4j5SnsHn8j8Py/JvAHNZrlu/P5XnXL+2fq7//7b85gAAAAAAg9DUFSuVTQEmcccmECsRPGEAriEBWm7mKtc1a7o2aH4GZuCeQ9d8JgQu5bktgOccADM7Hfevy3V7Unl5Pyzyf7vHl18191V2jy+H8n//W5bl13Ldgbev5c+6GQFHAAAAAIDzcnQBLK+aZeYg3NgEzdh07cMJtNTV/LWj5QDmZJL3KTA69xw61/y6DmiKYA8wPftXAPM5HffpdNz/syxLuvA/eV7epyBWDTV+Z/f4kkst/1sufw6QTsf9P1vd9wQcAQAAAADOcGp9M4QcByfc2IwcXQDcqlxHNFfWl1vYkL/Qr+gCWJZlWZ6s64AJ5OgC4BYdreuANqToAgAakKILAKCeK/e0f09rPLTad/JhquOlQcfXLQ4xFHAEAAAAALiM0+vbIOQ4KOHGdrS6uQYXEm6M0c06qVzjcnAZvPN+BUbXzf0RPvC6BS5mMjvAvzzjAJjE6bh/XS7b087L+8TGw6YFrehD0DFf8OVP5e9iNQKOAAAAAACXydEF8C8hx8EINzZFMyvdKo2VKbiMGeXegtG7xxdTHNuQrOmAkQnV06OeGi+BJjxEFwDQCs84AMZXAn3pgi/9tXt8+dXb3slvZQ/l13L+uVZaM+Qo4AgAAAAAcIFeHz4PTMhxEMKNzcnRBcAdnJQeoOOwoEB3G6wBgNG539CTHF0A0J0UXQBAQ1J0AQBs58JwY949vvxvhN6S3eNLLvs/555tpdNx/88avRsCjgAAAAAAl9OY2JbXNU8EpL4ybc3vsB3dTWGD39wPwnS7NirTiXJwGSzev8DYrK/pTLdrO6C+8lwPgP84fA1gUBeGG391fCDkt8peyiV/rrsPqBZwBAAAAAC4UHl4S1uSpvg+ld+bDf+2vEUXALcoG6YpuIwpDbA20sTfhmQyNzA49xt64MAb4FoP0QUAtMbzDYDxXBBuzMt7uDHXqCdCmeb4v+X8oZF3hRwFHAEAAAAArpOjC+Av6XTc330iIHWcjvt04SmXVDZAUIl5CbrH6P4k4tJwIHTSBoceAMOyzqYTDrwBrpWiCwBokOcbAAO5JNy4e3wZOtz4UZlQmc982c33QgFHAAAAAIDraPhqU1ruPBGQ7ZXfj3BjmwR86NLpuD9E1zCpYSb8CJ00I3k/A4Oz3qZp1kTANazdAb6VogsAYB2XhhsrldOMC0KOvw87vpqAIwAAAADAFTR8Ne/11gfmbKv8Xvxu2pWjC4BrldC0U9FjjBbSmK4JoVFPDqsABpajC4AfjLa2A7bnszjAN4TAAfpXruXphy+ZMtz421YhRwFHAAAAAIDrafxqWzod9/9okG/D6bhPp+P+n8XJxS0bZhIb09FQGeN5tGtG+fPk4DJ4530NDMm9hpY5zAu4hmeuAGc9RBcAwO0uOFxz6nDjbxeGHNM131PAEQAAAADgejm6AC7yejruXzXdxCjBRlMb+/AWXQBc64LTc9nIqA3wGhKacXXTA0BHHJZEi3J0AUB3UnQBAI1L0QUAcJef9raFGz+4IOR4Va+GgCMAAAAAwJVMXuhKWt4fnB+C65hK+ft+XWzkd2HUsBLjuuD0XLYzejBj9D9fLxyOAAxptAnIDMP6B7iWz+MAZ9iTAuhTObz3W8KNf7sg5Hjx5wcBRwAAAACA22gA68vT6bj/x6bytk7H/eF03P+zaHTqiWsZPXKNiZFHD0SXP18OLoPlfCMJQMesv2lJFrwFrmHaOsDFHqILAOA6pY8g/fAlwo3fOBP8TJf2aPzfOuUAAAAAAMxl9/iST8d9dBlc7+l03D8ty/I8ekijprIpIXDUIe8DelOaKVNwGbOaJZDxvHiNtSCdjvskdAGMZvf4ciifSaEFb9EFAN1J0QUAdCJFFwDA1X56XvNrjWfVEYcxV9wL/rUsy3cHFz6djvuzhywJOAIAAAAA3O55EerqlaDjCgQbuzdLWImxmOoWY5rpPuUQC2u8NjwtJmoCY3KfoQmehwA3cP8CuNDpuD9YbwH04XTc/7T3tOb+SPX19IeDtp6XDfd6LthbOfu8//+tXRQAAAAAwCxsTA7h6XTc/3M67l/LVDDOOB33qfx9/bNoauqaaxi9ObPBzIZ2jy+/omuoyfWxGSniRGuACnJ0AbA48Aa4kmenAFd7iC4AgPPKOjd99+8H2h95WpbltfRGpC1+QNlbyd/863Tu5wo4AgAAAADcR0PYGNLy3wP9Q3AtzSmhxkMJNb4uP2zy0A3XLrpyboOZTc16vRilaaF3TxqpgdGUk/JzcBlMzoEOwA0cdAZwnbNBDgCa8NM6d9R9gtcND4D+aU/px4NMBRwBAAAAAO6gIWxIH6c6HqKLifIh1Pi6vG82aGIaS44uAK7kGhRk1rWO8ElTvP+BEc16gABtyNEFAF1K0QUAdChFFwDA984crpnLPsGo0vIedExrftNzeys/9V8IOAIAAAAA3E9j4pjS8l/Y8Z8S9kvBNW2q/Bk/Tmp8WmzAj2j0DTkGUzY7U3AZsxr1dOKL7B5fpv7zN8TEA2A41uME8xwLuMrMh8AB3MmhTQBt++k6Pctn5y1Cjj/trXz7d/5/axYBAAAAADCj3ePL4XTc26Qc39PyHnhclvdTB9+Wpe/JVh+ak7x+JyKwQ0/KpqprVAxh6HfPi9dgC16XZflfdBEAK3OPIYI1HnCLh+gCAHp1Ou6T9RdAe1qa3rh7fFnt2fenw0kufe70ejruf638Z/72udfpuD981WMh4AgAAAAAsA6NiXNJ5f+WD+HWvJTQ49JYw+CnDZqHxSS0mc1y2ijjcG+N43qx/HuQhXtnA07H/auQPjAShyURxBoPuEWKLgCgY2l53z8CoC1DTm/8FBw8LMu/ocdzz6CelhXvV2eee315gIqAIwAAAADACjQmsnwIPS7/TXr87atNkFVCkJ9OYfxNEIMv9TxxlPmcOT2XbT23FNRvwPPitdiCZOoBMCCHJVGV+yhwrW+ePQJwuaelBEwAaEr65p83dZDxGsr+8OF03L8u3/+503eTFe/w3XOvL5/1CzgCAAAAAKxHYyLf+ep18TkECVvr9rRR/n97d3fdxo6sARSaNXmp9cAomACzkJQFE2AUfDAU2ZkHtT2yj/kjslkFNPZ+uetanlFZ9nSDQH2FYf3ILmBUwtC/2+wO9bjfWue1YdEp0gDZDEsimM+EwC3+ersKD/Hu8ziRjvvtP9k1jMLAJoC2XBjisdrPzpvd4eVCyHHRUP6Ffa9/7fX/Z6lvDAAAAAAwOs0HQMs8o+jJfMBKjtUe3t/DM7QZkxtkgBWq2QUwBusZ4EZTdgGj8JwmQc0uYCBTdgEA/OZU6G51tzf+abM7vJQza4AH7L+f+l7Tn78g4AgAAAAAsCyhAKBFnk1047jfTkXTT5aqofKsl+wCKKV83oI9ZRcBsCBrdSL4dwZ8m+EioWp2AQzJ+iCOW9sBGnFhb/kjqo5Mc8jxlKVvcD+53vjz84aAIwAAAADAgoQCgAYJLNEbDT95NLadMU9ursll8MlzAlgN7xeC1OwCgC5Zd8cZopmetqz9hqrWCI0DNGM69YXBzlNPnQdNS36TC+uN38KUAo4AAAAAAMsTDgBa4plEN+ZGnym5jFFVjW2XXZhsTJzJLY7Aygg18EjWecC3WW/HGqyZnrbYO46z9I1YANzm1BCP0d6AJBS9AAAgAElEQVSJNfB7XRWmFHAEAAAAAFjY3IxQk8sAKEUjKx2ZmyfdDpFEcO9bRmt0aNWP7AIAliLUwINZuwC3mLILGEjNLoCh1ewCBjJlFwAwugtDPGpQGU04d378gGEnV30vAUcAAAAAgMfQPAakE1iiM8KNeaxbvsEwi3Yc91shR2BNvI95CENvgBv5jB7HTc6ksU6Iddxv37JrABjcdOoL3om/mZb8L7vws/31vQQcAQAAAAAeYN6krcllAGMTbqQb84TWKbmMYbk16iZCKG2YHjBNGiCF9zEPYs0CfJs1dixrABpgvRDnObsAgMGdeg7XyCIaUgO/16n1xq/BKgKOAAAAAAAP4uY0IFE1aZTOuIUtj/XKDeZnrAbANrhZBliTml0A6yI0A9xoyi5gIDW7ACj+HUaasgsAGNx04tdHvVG7qT+3gCMAAAAAwGNpfAcyePbQjeN+K9yYRxj6DnNgoCaXwectjm/ZRQAsxDqeJfn3BNzKEJE4ntWkszcUyx4GQJNqdgFJwtb95wYw/bxBXsARAAAAAOCBNL4DCd41pdCL+dBySi5jZBop7+dn2IbXn00QAD2b1/E1uQzWo2YXAPTHujqWPTwaYn8jznN2AQAjOhcwtyZLN5Ui4AgAAAAAEMHBMBClnpuACQ1yK0QeYegFCKI0xfMEWIuP7AJYBTd1A7eyro7j3ICW1OwCBjJlFwDAb2p2Aa154Fnz2fWvgCMAAAAAwIPNDWWaFYAInjV0Y56WOyWXMSxh6OVsdoeX7BoopZQyuW0GWAPvaBbisyFwqym7gIHU7ALgJ4MRYp27RQyAcEMOmmrsXfRcioAjAAAAAECIuUGxJpcBrNuLRhR6MYeQ3AqRR8P78oQc2/AjuwCAhXhXcxefDYFbNNbkvHqe1TTIGjSOfVGAeJ69v3s+8es1sojZVIqAIwAAAABAJIfDwKNUTVF0xkFynupmqOXNz+CaXAallON+K+QIdM+7mjvZfwJudarJmeV5VtOiml3ASOYBcAAQbh5sMp348sNutLy03yXgCAAAAAAQZG58d7sPsLS62R08W+jGhYNTHk8T5eP42bZh0iQIrETNLoA+CcgCd5iyCxhIzS4A/mSAXrgpuwAAxvsMPe+dnxxCmvnzEHAEAAAAAAjkdh/gAQRq6I3bG/O47fWB5p+tZ3IbPGeANfBO4Rb+3QA3mYcREcRncxpmLRHH3gUAoeZw448zv6XGVPJ3Ao4AAAAAAMHctAYs6EVDFD057rfnDk55MGuQx5unG9fkMvi8xfEtuwiAexiQxI1qdgFAt56zCxiIABktq9kFjGQOmgDAw8375ZfO6NLWqcf99k3AEQAAAAAgh4ABcC83sdGVuWFnSi5jZBoo4/hZt+FVoyCwAh/ZBdAVnxGBe0zZBQykZhcApxiyEW7KLgCA9Trut9Nxv3077rf/lMs3B79n7yn8N/ObAwAAAACMarM71ON++14ubyQD/E11ExsdcntjovlmQQLM67xaNKm14LVozAQ6ttkd3o77rX0DrmXIAnATt5/Hym4chyt8FHsaUV5LKW/ZRQCsXeuD8B6wHv/uXlJt4QxJwBEAAAAAIMncqPhcHBQD36dxla5olkwnEB1sszu8zFORyTUd99tJAzHQOcORuIbbG4F7eM/EsadH8wzZiGXfAiDElF3ABZnv3eihuif3uf4TWAQAAAAAAH+YN4trdh1AV140PNCTeTKupqg8mt3zCJa2we2xQNdamKBPFz6yCwD61PptNitUswuAK9XsAgZi3xSALNHhxrMEHAEAAAAA8pnaDFxLuJEeadLJZZ2RZH5e1+QyKKUc91shR6B33uecJQgL3GHKLmAk9vXoiOEJcabsAgAY0ktL4cZSBBwBAAAAANLNTQ1NbR4DTXrXBEVvjvvtW9Gkk8lzI59AShsmN9MAnavZBdA06w3gHoYSxfG8phuGJ8Sa91ABIML7Znd4Sjw7Ovn5Q8ARAAAAAKABQo7ABVVTCZ3SKJnIcyPfvMbTxNoGzyOgW24F5hxrPuBWhoCEq9kFwDfV7AIG8pxdAMCaDf65uZbPM4qXOdj4llvOaf/NLgAAAAAAgE+b3aEe99ta3HQF/K5udgcBaLpz3G9/ZNcwOKG6Rmx2h7fjfvtcrPGyTcf99q3lBg6AC96Ldwn/VrMLALo2ZRcwkJp4Sw7c6qN4TkSZsgsAINV3znPODfJ7L6XfQKeAIwAAAABAQza7w8scCJmyawGaINxIl+ZbIKbkMkbm1tf2CKW04fW432osBro0D0XKLoP2GGoB3MMt53E+sguA75oHNnlOBDGUCWBc33n+zwOzTw0Yfe74XLn+J7sCAAAAAAB+N2861+w6gHTCjfTM7Y25NLo3Zg7U1eQy+KQ5E+iZdzxfCe0DN5sHExFEaImO1ewCBvKcXQAA7btw1jAd99u3sGIWtNkdBBwBAAAAAFok5AjDE26kW70enq6IRvdGea43Y9LMDfRKOII/uA0MuIfBH3FqdgFwB+uNOFN2AQAj6nGv+EIvyWuPf6ZSShFwBAAAAABolJAjDM3NLHRpPjTVJJlIiK55/n7a4JZZoGc+K1BKEXgF7jZlFzAQATG6Zb0Ry+A4gBRTdgE3Orc/1OT+96XgpYAjAAAAAEDDhBRgSC9uX6Njwo25BB4aNz/fa3IZlFKO+22TTR4AV6jZBdAE6z7gZgI0sQTEWIGaXcBAnrMLAFixVX2Ons8aTvaSNLr/PZ37ooAjAAAAAED7hBxhHMKNdGtukJySyxiapslurKqRomPTpYnRAC0SlqcU6z7gbgI0cWp2AbAAt5DGsVcBEK/btfGFPaKpo8Em76UIOAIAAAAANO/S9D1gFepmd3gSbqRzbm/MZa3QiflZL+TYBs8toFfeI2Or2QUA3ZuyCxiIYBjdM1gh3JRdAMBgpuwC7rHZHc6dDb02Fpw/GyYVcAQAAAAA6ICQI6xavXD4BM077rc/smsYXBWQ7svcHFiTy6CvKdYAv3jvD0/AFbiZ9W8swTBWpGYXMBDDmAAeo2YX8EBnQ45hVVw2nfuigCMAAAAAQCc2u0Pd7A5PZd2b7zAa4Ua6N09/nZLLGJ0m9z75e2tDa1OsAa7lPTImgy2Ae529NYVF1ewCYEHWnoHsUwAs79xn6d6HgMx/tlPv6qmFIaXn3m0/h4IIOAIAAAAAdGYOQ9XsOoC7CTeyFukHo4N71+Tep/nvrSaXwaeWplgDXMWNUMP6yC4A6N6UXcBAPLNZDXtP4absAgBWqmYX8CjzPlE98eWpgfD8xe8v4AgAAAAA0CEhR+iecCOr0PtU2zUQbuibd0EzWmjwALiFm3QGY+0H3MNn+Fie2ayQtWccg5gAHuPUAIpVPHcvnDf8SN4DP3WT/K/1hYAjAAAAAECnhByhW+8CLazBfBC6ikPfjmksWwfvhDa4jRboUc0ugFDWfsC9fIaPU7MLgAeo2QWMxCAmgIeop76woufuufOGzM8D06XfIOAIAAAAANAxIUfozovp7ayIxshc1fNkHTa7Qy3Wc0047rdCjkBXvEPGYu0H3GNFDdu9OHU7EHRrXnsSZ8ouAGBtLrzLpqAyHurCXtGUsQd+7ib5r3sdAo4AAAAAAJ2bQ45u/oH2vWgCYS3mw8gpuYzRucFnXfx9tmHS+A10yDtkDP6egXtN2QWMRCidFbMmiWO4HMBj1BO/vprn7oUh2Rl74M/X/CYBRwAAAACAFZhDU0KO0Ka62R2ehBtZi/ngczUHvZ2qninrMv99ahJsg+cb0BW3OA6jZhcAdM86N07NLgAeqGYXMJJzN14BcLOTN22vbPjdufOG6FscpxO//luNAo4AAAAAACsh5AhNqvOUTFgTTZHJPFfWab7hoyaXwecE67fsIgC+6WRzHqtguAVwl5U1avfA8BpWy5ok3FU3XgFwvQs3bU9BZTzcpd6R434bEnK8sNdev/4/Ao4AAAAAACuy2R3qZnd4KprjoQUvQkiszdwUOSWXMTqNkuvm77cNr5rAgZ5caM6jf9YHwL2m7AJGIgDGAKxN4kzZBQCsVD3x66sa8DmvS+uJL0cN+jv1M/3XMCcBRwAAAACAFZpDVTW7DhjYi2YmVipkoiunCTCs24WGA2KtqpkFGIJG85Xy2RJYgLVtHO9jRlCzCxhJUPgEYDQn12xre+5eGMb70EF/F36WH3/+goAjAAAAAMBKzZvVbo+DWHWzOzxpQGWNjvutcGM+7/UBuP23GZNbHIGeGIKwWoIywF2sacPV7ALg0ex9h3vOLgBgbS68y9Y4HOTcmcMjz/5OvsP+to8l4AgAAAAAsGLz5rzbHCHGu1AKazU3RE7JZYyuaiAbivdJGwS7gd7U7AJYluAqsIA1Nmg3y+d2BmIIQ5wpuwCAlRrpFsdazv95F98Hv3Cu+NdaBBwBAAAAAFZuszvUOXRVs2uBFXvReMrKaYjMp3FsIHPDQU0ug+L2WqA71gvr4u8TWMKUXcBAPLcZSc0uYCRrC9oAtODCue7qzsTmP2898eXpAe+akz/DUz97AUcAAAAAgEHMIUe3AcGy6mZ3eDKdnTWbDzWn5DJG5/bGMWmObcM0T5sGaJ6A/OrU7AKAvgnEhKvZBUAU+1ThnrMLAFipYW5xLOVXv8gpr0vtg184Vzz5MxdwBAAAAAAYyHzo7DZHWMbLhYMg6N58mLm6SbW98awZ07xuE3Jsg+cg0JOP7AJYhAEXwBIEYgJ5bjMgexZxpuwCANbo0i2OKx18dzbkuND3+PbtjaUIOAIAAAAADGezO9Q5KOHwGW7j1kZGItSTz/t6YPNhf00ug89bHN+yiwC4xoXmPPphDQgsYcouYCCe24yoZhcwEvsSAA9zbh23ujOy+Xy7nvjydNxvf9zz33/hP392zSzgCAAAAAAwqLnp0Y1Q8D1ubWQY82TaKbmM0VUhBYpG2VasdWI3sE7eHZ0zUAe4lyBMuJpdAES7EJBgeasL2QC04MKQwVUOvpvPuuuJL0+37oNfOle8dN4l4AgAAAAAMLD5Nsen4hAaLnFrIyO6a0orixBOQMNgWzQTAl0wIKF71oDAEp6zCxiJPUMG9pFdwEgMXgJ4mLO3OK70+Xvuz3zr+eDNtzeWUsp/b/ymAAAAAACsyGZ3eJk35oVZ4N9eNCkxmuN+632Qr3r28NO8Vvsnuw4+p1f73ybQiVrcxt0lAVVgIVN2AQMRTGdYm93h7bjfGgYUZyqGYAEsbrM71ON+W8vpNfRrWeD5Ow+ebsK8x71YPRfOFes1ex1ucAQAAAAAoJTy222OGjLgk1sbGdIceJ+Sy8D7mH97yS6AUoqBIEA/rCX65O8NuNtxv33LrmEwNbsASFazCxiIMCnAg2x2h3P775PBoKfNnz+mM7/lqr0OAUcAAAAAAH4zT897KQ6lGVctn7c2CpIwKo0y+d6Fq/nT/G+iJpdBccst0AfvjW7V7AKAVfC5PpDP71A+sgsYyTycDoDHuBRyfIsqpBfze+nc54+rz7sEHAEAAAAA+Jf5NseX4uYAxvO+2R1eNCYxqiumrBJgHjYAf2Nt1oZJQyHQCc3mfak+iwL3sk4N5zMaw7OPFW7KLgBgra4YFvVqvf1/88/i3DDA+p11goAjAAAAAAAnbXaHt83u8FTcIMD6vW92hyfNGIzsiimrxHB7LCfNDRYaaNvgeQk0z+eb7njHA0uYsgsYTM0uABpRswsYiP0IgAeah0DXM7/lh5Dj1eHGb513CTgCAAAAAHDRvPl8aTMfelRLKS8af6GUojmmBW7t4aL5nVWTy+DzFse37CIAriA01wfrQGApPtvH8eyG/3NzeCDBGoDHuiKYN3TI8YpwYyk37EcJOAIAAAAAcJXN7lAFHVmRWj6DjS8akeDXYeSUXAYCCFzPv5U2vI7cyAL0wTCXbggFAHezNg3n2Q0za85wwuwAjyfk+BdXhhtvOn8XcAQAAAAA4Fu+BB011tOjWgQb4W8uHUbyeG5+4Grzv5WaXAafNBUCPfD5vXFCAcBCpuwCRuLZDf9SswsYyJRdAMDazXvw14Qchzlfe2S4sRQBRwAAAAAAbrTZHd42u8NT0ShJH2oRbIS/GunwtWXz8AC4mn8zzZhGnNQNdKdmF8BZ9lWApRi+EadmFwANcqtpoON++5ZdA8DaXRlynEY4Z5v/jA8LN5Yi4AgAAAAAwJ0EHWlcLYKNcNIcypmSy8A7lNsJObZh9Q0sQN/c/Ns2N4ABSzB0I5wgF/zBmibcc3YBACP4RsjxnzWuyY/77c8A53Tht959Fi/gCAAAAADAIgQdaUwtgo1wDbc75KsawLiVwEo7RpjSDXTPZ/U21ewCgNXw+T6Qz/FwUs0uYCBTdgEAo7gy5FhKKT/WdMPu/GcJCTeWIuAIAAAAAMDCBB1JVotgI1xlPpicksvA+5L7+TfUhmmNE7qB9fD5qFne48BSpuwCBlKzC4CGud000JpCNACt+0bI8bX32xy/3Np4zRCVxc7kBRwBAAAAAHiIL0HHl6Lpg8d7L4KNcLX5YNXtDvmqZxb3mv8NCUe0wXMVaJ33RVusBYFFCLiEE+CCE9xuGu45uwCAkWx2hzr3P9QrfvuP4377o6eg45dg4zW3NtayYLixFAFHAAAAAAAebN7ofymCjjzG+2Z3eJoDtTW7GOiIEE4bhAxYxNxAWJPL4PMWx7fsIgBO0XDeHAEZYCkCLoG8T+Giml3AQKbsAgBGNPc+1Ct+61Q6CDp+M9hYyufApsWHDgs4AgAAAAAQ4mfQcZ5qKNDBPWr5nAj5pKEIvm8O30zJZfAZ0K7ZRbAq1ldteG25WQWgeF80w+dZYEFTdgEDqdkFQAesNwMZtASQ48uA52tM5f9Bx7eHFfVNNwQbS/k8o7/2z/0tAo4AAAAAAISbb9t7Km515Ht+3ta4+ERIGIzbGxugoZ2lze9GTYRt8JwFWlazC6CU4p0NLKSlBulBuH0XLrB3H84eBECSecDzU7l+r2UqnwPy/jnut28Zg/LmUOPbcb/9p3wv2FjLZ7ixPqi08t9H/RcDAAAAAMAl8wZ4LeVXM85zMXGc372XUqqmCFjGPImVfA+Zbgub3eHtuN9qbMs3HffbyfoFaNFmd6jH/bYWn71TGXYBLOg5u4CReH7D1d6L4F0YexAAuTa7w8scVnwt1++3vJbPsGMpn/0SH+UBZ+JzXVO5rw8jZPiwgCMAAAAAAE342RzyZZPd4fe4ainlQ8MQLOvL85VcQts82kv5nLxMrh+llKfsIgBOeC/WhZlqdgHAqkzZBQykZhcAHanFGU+kqXhGAaT6Odh5Hur83XfgVP5/u+PPX3v/4/ecPFs6cf63xHv4PfK8XsARAAAAAICmfLnV8U3YcSi1CDXCowk8teHPQ2lYlJu52nHcb39sdgc3tgLNmd8V2WWMzHoQWMTcPE2cj+wCoBfWm+FeSylv2UUA8Guo89uNQcev/vzPvga+W0ODjT/9J/obAgAAAADAtTa7Q93sDm+b3eGpfN5G9F5MoV2T9/J5QPK02R1ehBvhcTQ9NsPtjYQQqmvGNA/sAGiRkF0O60FgSYbCBbJ3Cd9mvRnI/gNAW770OPT0Pvx5bv+W8c3d4AgAAAAAQBe+3OxYSvkV1nkubifqSS2fk841dEKgublF02MDhM4I9l78b78Fr8WADqBBm93h7bjfek/Ec/sXsAhBlnA1uwDoUC32JSJNxbMKoDlfbnScyuezurV3Yy2fwcaaXIeAIwAAAAAAffo6OfDLgYDAY3veSzHhHJK1dlg6qp6m9LICc3DF2ijfdNxv36yFgEYJwwfzPgAWNGUXMBif6eGbNrtDPe632WWM5LWU8pZdBAB/92WYcwthxybP7wUcAQAAAADo3l9ud5yKwGOWJg9EYFTzbbdTchl83lz7ll0EQ3ovngEteD3ut26wBlpUi4BjJOEYYEme34Gs5eFmBmoEOu63k+cVQPu+hh1L+XWWV8rj3pldnN8LOAIAAADXqtkFrFTNLgBgjc4EHktxmL6kWkr5KJ/BnZpbCnCGRup8NbsAxjTflvBShBxhaTW7AFjC/J6wVgzSeiPhSvn3/Rg1u4DRzXudxPEsgdvV4kwm0lS8p/lUswtYqZpdAOv0Zb/g5//9s7/hu7o8u3867rf/ZBfRsHcbSzCeOQHvA9Vpno2AZ+UFm93hKbsGAADgMqHHb/vVyGN/CAAAAABy6NkI99Jjgzi0QlYhlr41AHrlBkcAAAAAAIb0xy2Pbz9/fW4Q+um5jHfjkSAjAAAAADRq3rN7Sy4D4CoCdwDANQQcAQAAAADgi3Ohvj/Cj6X0F4CspZSPr78gxAgAAAAAAAAAZBFwBAAAAACAK10bBjzut1O5Lvj43YBkLX8EFE8RXAQAAAAAAAAAWifgCAAAAAAAC9vsDrV8hhEBAAAAAAAAADjhP9kFAAAAAAAAAAAAAAAAAADjEXAEAAAAAAAAAAAAAAAAAMIJOAIAAAAAAAAAAAAAAAAA4QQcAQAAAAAAAAAAAAAAAIBwAo4AAAAAAAAAAAAAAAAAQDgBRwAAAAAAAAAAAAAAAAAgnIAjAAAAAAAAAAAAAAAAABBOwBEAAAAAAAAAAAAAAAAACCfgCAAAAAAAAAAAAAAAAACEE3AEAAAAAAAAAAAAAAAAAMIJOAIAAAAAAAAAAAAAAAAA4QQcAQAAAAAAAAAAAAAAAIBwAo4AAAAAAAAAAAAAAAAAQDgBRwAAAAAAAAAAAAAAAAAgnIAjAAAAAAAAAAAAAAAAABBOwBEAAAAAAAAAAAAAAAAACCfgCAAAAAAAAAAAAAAAAACEE3AEAAAAAAAAAAAAAAAAAMIJOAIAAAAAAAAAAAAAAAAA4QQcAQAAAAAAAAAAAAAAAIBwAo4AAAAAAAAAAAAAAAAAQDgBRwAAAAAAAAAAAAAAAAAgnIAjAAAAAAAAAAAAAAAAABBOwBEAAAAAAAAAAAAAAAAACCfgCAAAAAAAAAAAAAAAAACEE3AEAAAAAAAAAAAAAAAAAMIJOAIAAAAAAAAAAAAAAAAA4QQcAQAAAAAAAAAAAAAAAIBwAo4AAAAAAAAAAAAAAAAAQDgBRwAAAAAAAAAAAAAAAAAgnIAjAAAAAAAAAAAAAAAAABBOwBEAAAAAAAAAAAAAAAAACCfgCAAAAAAAAAAAAAAAAACEE3AEAAAAAAAAAAAAAAAAAMIJOAIAAAAAAAAAAAAAAAAA4QQcAQAAAAAAAAAAAAAAAIBwAo4AAAAAAAAAAAAAAAAAQDgBRwAAAAAAAAAAAAAAAAAgnIAjAAAAAAAAAAAAAAAAABBOwBEAAAAAAAAAAAAAAAAACCfgCAAAAAAAAAAAAAAAAACEE3AEAAAAAAAAAAAAAAAAAMIJOAIAAAAAAAAAAAAAAAAA4QQcAQAAAAAAAAAAAAAAAIBwAo4AAAAAAAAAAAAAAAAAQDgBRwAAAAAAAAAAAAAAAAAgnIAjAAAAAAAAAAAAAAAAABBOwBEAAAAAAAAAAAAAAAAACCfgCAAAAAAAAAAAAAAAAACEE3AEAAAAAAAAAAAAAAAAAMIJOAIAAAAAAAAAAAAAAAAA4QQcAQAAAAAAAAAAAAAAAIBwAo4AAAAAAAAAAAAAAAAAQDgBRwAAAAAAAAAAAAAAAAAgnIAjAAAAAAAAAAAAAAAAABBOwBEAAAAAAAAAAAAAAAAACCfgCAAAAAAAAAAAAAAAAACEE3AEAAAAAAAAAAAAAAAAAMIJOAIAAAAAAAAAAAAAAAAA4QQcAQAAAAAAAAAAAAAAAIBwAo4AAAAAAAAAAAAAAAAAQDgBRwAAAAAAAAAAAAAAAAAgnIAjAAAAAAAAAAAAAAAAABBOwBEAAAAAAAAAAAAAAAAACCfgCAAAAAAAAAAAAAAAAACEE3AEAAAAAAAAAAAAAAAAAMIJOAIAAAAAAAAAAAAAAAAA4QQcAQAAAAAAAAAAAAAAAIBwAo4AAAAAAAAAAAAAAAAAQDgBRwAAAAAAAAAAAAAAAAAgnIAjAAAAAAAAAAAAAAAAABBOwBEAAAAAAAAAAAAAAAAACCfgCAAAAAAAAAAAAAAAAACEE3AEAAAAAAAAAAAAAAAAAMIJOAIAAAAAAAAAAAAAAAAA4QQcAQAAAAAAAAAAAAAAAIBwAo4AAAAAAAAAAAAAAAAAQDgBRwAAAAAAAAAAAAAAAAAgnIAjAAAAAAAAAAAAAAAAABBOwBEAAAAAAAAAAAAAAAAACCfgCAAAAAAAAAAAAAAAAACEE3AEAAAAAAAAAAAAAAAAAMIJOAIAAAAAAAAAAAAAAAAA4QQcAQAAAAAAAAAAAAAAAIBwAo4AAAAAAAAAAAAAAAAAQDgBRwAAAAAAAAAAAAAAAAAgnIAjAAAAAAAAAAAAAAAAABBOwBEAAAAAAAAAAAAAAAAACCfgCAAAAAAAAAAAAAAAAACEE3AEAAAAAAAAAAAAAAAAAMIJOAIAAAAAAAAAAAAAAAAA4QQcAQAAAAAAAAAAAAAAAIBwAo4AAAAAAAAAAAAAAAAAQDgBRwAAAAAAAAAAAAAAAAAgnIAjAAAAAAAAAAAAAAAAABBOwBEAAAAAAAAAAAAAAAAACCfgCAAAAAAAAAAAAAAAAACEE3AEAAAAAAAAAAAAAAAAAMIJOAIAAAAAAAAAAAAAAAAA4QQcAQAAAAAAAAAAAAAAAIBwAo4AAAAAAAAAAAAAAAAAQDgBRwAAAAAAAAAAAAAAAAAgnIAjAAAAAAAAAAAAAAAAABBOwBEAAAAAAAAAAAAAAAAACCfgCAAAAAAAAAAAAAAAAACEE3AEAAAAAAAAAAAAAAAAAMIJOAIAAAAAAAAAAAAAAAAA4QQcAQAAAAAAAAAAAAAAAIBwAo4AAAAAAAAAAAAAAAAAQDgBRwAAAAAAAAAAAAAAAAAgnIAjAAAAAAAAAAAAAAAAABBOwBEAAAAAAAAAAAAAAAAACCfgCAN1ruUAAAHcSURBVAAAAAAAAAAAAAAAAACEE3AEAAAAAAAAAAAAAAAAAMIJOAIAAAAAAAAAAAAAAAAA4QQcAQAAAAAAAAAAAAAAAIBwAo4AAAAAAAAAAAAAAAAAQDgBRwAAAAAAAAAAAAAAAAAgnIAjAAAAAAAAAAAAAAAAABBOwBEAAAAAAAAAAAAAAAAACCfgCAAAAAAAAAAAAAAAAACEE3AEAAAAAAAAAAAAAAAAAMIJOAIAAAAAAAAAAAAAAAAA4QQcAQAAAAAAAAAAAAAAAIBwAo4AAAAAAAAAAAAAAAAAQDgBRwAAAAAAAAAAAAAAAAAgnIAjAAAAAAAAAAAAAAAAABBOwBEAAAAAAAAAAAAAAAAACCfgCAAAAAAAAAAAAAAAAACEE3AEAAAAAAAAAAAAAAAAAMIJOAIAAAAAAAAAAAAAAAAA4QQcAQAAAAAAAAAAAAAAAIBwAo4AAAAAAAAAAAAAAAAAQDgBRwAAAAAAAAAAAAAAAAAgnIAjAAAAAAAAAAAAAAAAABBOwBEAAAAAAAAAAAAAAAAACCfgCAAAAAAAAAAAAAAAAACEE3AEAAAAAAAAAAAAAAAAAMIJOAIAAAAAAAAAAAAAAAAA4QQcAQAAAAAAAAAAAAAAAIBw/wNe7gs5AK+GDAAAAABJRU5ErkJggg==" alt="TuxMat logo" />
+        <div class="tagline">Car Accessories, Reimagined.</div>
+      </div>
+      <div class="module hero-img-mod">
+        <div class="module-label" style="color:#777;">Module 03 &middot; Hero image (swappable, this issue's pillar)</div>
+        <div class="hero-img-box">[HERO IMAGE: macro shot of a factory anchor point locking into its mount, mat edge visible following the floor pan's contour, no lifestyle staging]</div>
+      </div>
+      <div class="module hero-copy-mod">
+        <div class="module-label" style="color:#777;">Module 04 &middot; Hero headline block (swappable, Engineering Depth leads this issue)</div>
+        <h3>The Fit Decides<br>What Material Can't.</h3>
+        <p>A mat cut from good material still shifts, still gaps at the edges, if it was never scanned to the exact floor pan. Fit and coverage are engineered first. The material just holds that shape.</p>
+        <a class="cta-btn" href="https://www.tuxmat.com/blogs/articles/why-floor-mat-fit-and-coverage-matter-more-than-material">Learn More</a>
+      </div>
+      <div class="module feature-callout-mod">
+        <div class="module-label">Module 05 &middot; Feature-callout &mdash; active this issue</div>
+        <div class="callout-img-box">[MACRO SHOT: a factory anchor point engaging its mount]</div>
+        <ul class="leader-lines">
+          <li><strong>3D-scanned contour</strong> &middot; follows the exact line of the floor pan</li>
+          <li><strong>Extended coverage edge</strong> &middot; reaches up to 2.5x further than conventional mats*</li>
+          <li><strong>Factory anchor point</strong> &middot; locks the mat in place, no shifting</li>
+        </ul>
+      </div>
+      <div class="module value-prop-mod">
+        <div class="module-label">Module 06 &middot; Value-prop (swappable, the pillar's substance)</div>
+        <h4>Precision Is The Protection.</h4>
+        <p>A universal mat is a guess dressed up as a fit. TuxMat scans each model's floor pan in 3D and builds the mat to that exact contour, then extends the coverage well past where a conventional mat stops, up to 2.5x further*. Factory anchor points hold it there, so the fit doesn't shift after the first drive. Material matters, but only once the fit and coverage are right. <a href="https://www.tuxmat.com/blogs/articles/why-floor-mat-fit-and-coverage-matter-more-than-material" style="color:var(--gold);text-decoration:underline;">See the full breakdown</a></p>
+      </div>
+      <div class="module stat-bar-mod">
+        <div class="module-label">Module 07 &middot; Proof / stat bar (fixed, values only update if the real figures change)</div>
+        <div class="stat-card">
+          <div class="stat"><div class="stat-num">2.5x</div><div class="stat-label">Extended Coverage*</div></div>
+          <div class="stat-divider"></div>
+          <div class="stat"><div class="stat-num">4.8★</div><div class="stat-label">Thousands of Drivers**</div></div>
+        </div>
+        <div class="warranty-line">Backed by our Limited Lifetime Warranty.</div>
+      </div>
+      <div class="module grid-mod">
+        <div class="module-label" style="color:#999;">Module 08 &middot; Explore Our Full Range (fixed type, selection may vary; Capsule™ is standard here every issue)</div>
+        <h4 class="grid-heading">Explore Our Full Range</h4>
+        <div class="product-grid">
+          <div class="product-card"><div class="product-thumb">Mats</div><div class="product-label">TuxMat Car Mats</div></div>
+          <div class="product-card"><div class="product-thumb">Trunk</div><div class="product-label">TuxMat Trunk Mats</div></div>
+          <div class="product-card capsule-card"><div class="product-thumb">Capsule</div><div class="product-label">TuxMat Capsule™ License Plate Case</div></div>
+        </div>
+        <a class="cta-btn" href="#">Find Your Fit</a>
+      </div>
+      <div class="module tagline-mod">
+        <div class="module-label">Module 09 &middot; Closing tagline (swappable, sign-off only, no CTA)</div>
+        Precision is the protection.
+      </div>
+      <div class="module footnote-mod">
+        <div class="module-label" style="color:#555;">Module 10 &middot; Legal footnotes (fixed)</div>
+        *Surface area comparison to 2025 Tesla Model Y OEM floor mats.<br>**Based on 4,500+ Google Ratings.
+      </div>
+      <div class="module social-mod">
+        <div class="module-label" style="color:#555;">Module 11 &middot; Social follow row (fixed)</div>
+        Follow our social media platforms &middot; LinkedIn &middot; YouTube &middot; Instagram &middot; Facebook &middot; TikTok
+      </div>
+      <div class="module address-mod">
+        <div class="module-label" style="color:#555;">Module 12 &middot; Address (fixed)</div>
+        [Company address] &middot; [website] &middot; [phone]
+      </div>
+      <div class="module unsub-mod">
+        <div class="module-label" style="color:#555;">Module 13 &middot; Unsubscribe (fixed)</div>
+        <span class="unsub-link">Unsubscribe</span>
+      </div>
+    </div>
+    <p style="font-size:12px;color:#777;margin-top:10px;">Two CTAs total, module 04 and module 08, matching TuxMat's real per-issue limit.</p>
+  </section>
+
+  <section id="review">
+    <div class="eyebrow">Part 5</div>
+    <h2>Brand &amp; segmentation review findings</h2>
+    <div class="review-grid">
+      <div class="review-item pass">
+        <h4><span class="status pass">Pass</span>Voice &amp; tone</h4>
+        <p>No exclamation marks, no em-dashes, no urgency language. Both CTAs (Learn More, Find Your Fit) are on the approved list.</p>
+      </div>
+      <div class="review-item pass">
+        <h4><span class="status pass">Pass</span>Claims substantiation</h4>
+        <p>Every claim in this draft, up to 2.5x extended coverage, 3D laser scanning model-specific fit, factory anchor points, is already verbatim in the core approved product benefits bank. Nothing here needs a new sign-off.</p>
+      </div>
+      <div class="review-item pass">
+        <h4><span class="status pass">Pass</span>CTA choice</h4>
+        <p>Learn More was chosen over Discover TriForce deliberately: TriForce is a material-construction claim, and this issue's claim is about fit and coverage, not material. Using Discover TriForce here would misattribute the story to the wrong product feature.</p>
+      </div>
+      <div class="review-item pass">
+        <h4><span class="status pass">Pass</span>Feature-callout consistency</h4>
+        <p>This issue's callout is a factory-anchor-point macro shot, a different visual concept from the material cross-section used elsewhere on the calendar, so back-to-back Engineering Depth issues don't repeat the same image concept.</p>
+      </div>
+      <div class="review-item pass">
+        <h4><span class="status pass">Pass</span>Two-lens relevance</h4>
+        <p>Owner gets quiet confirmation the fit decision was already right, no pitch. Subscriber gets a checkable spec (2.5x coverage, 3D scan, anchor points) and a real guide to verify it against. Neither lens is named outright. Once segmentation exists, this is a candidate for the owner path to point somewhere else, a fit-check or maintenance angle rather than a buying guide.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="appendix">
+    <div class="eyebrow">Appendix</div>
+    <h2>Earlier demonstration draft (August, Design Authority &mdash; not sent)</h2>
+    <p class="lede">Before the calendar was set to start in October 2026, this document used an August Design Authority issue as the working example. It was never sent. Preserved here for provenance, since some of its content (the module-framing correction, the dropped placeholder testimonial) shaped decisions still in place above. Design Authority recurs for real in August 2027, on the reordered calendar.</p>
+    <div class="note-box">
+      <strong>Original subject line (recommended):</strong> "Still looks like June in here." <strong>Hero headline:</strong> "Still Designed To Belong." <strong>Hero CTA:</strong> Refine Your Ride, to the shop-by-vehicle catalogue. <strong>Closing tagline:</strong> "Still designed to belong." Module 5 (feature-callout) was skipped that issue, correctly, since Design Authority had no feature-level engineering claim to place there.
+    </div>
+  </section>
+
+</main>
+
+<footer class="final">
+  <p><strong>Before send:</strong> confirm the 2.5x and 4.8★ figures are still current, source or shoot real photography for the hero and feature-callout placeholders (this post currently has none), and confirm the blog post URL is live.</p>
+  <p style="margin-top:14px;opacity:.7;">TuxMat &middot; Internal reference &middot; Not for external distribution</p>
+</footer>
+
+</body>
+</html>
